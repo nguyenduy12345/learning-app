@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import 'lazysizes';
 
 import Home from './pages/Home.jsx'
 import Register from './pages/Register.jsx'
@@ -9,6 +10,7 @@ import Profile from './pages/Profile.jsx'
 import Rank from './pages/Rank.jsx'
 import Misson from './pages/Misson.jsx'
 import Alphabet from './pages/Alphabet.jsx'
+import Character from './pages/Character.jsx'
 import Milestone from './pages/Milestone.jsx'
 import Lesson from './pages/Lesson.jsx'
 import ForgotPassword from './pages/ForgotPassword.jsx'
@@ -32,6 +34,7 @@ function App() {
         <Route path='/rank' element={<Rank />} />
         <Route path='/missons' element={<Misson />} />
         <Route path='/alphabet' element={<Alphabet />} />
+        <Route path='/character' element={<Character />} />
         <Route path='/lesson' element={<Lesson />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='*' />

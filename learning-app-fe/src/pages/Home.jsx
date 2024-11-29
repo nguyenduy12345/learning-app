@@ -250,7 +250,7 @@ const Home = () => {
   // }, []);
   return (
     <>
-      <div className="h-auto w-full bg-black font-mono">
+      <div className="h-auto w-full bg-black font-noto">
         <ul className="relative h-[35vh] w-full sm:h-[45vh] md:h-[60vh] xl:h-[100vh]">
           {
             <li className="image absolute left-0 top-0 h-[100%] w-full object-cover">

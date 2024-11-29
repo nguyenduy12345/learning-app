@@ -10,11 +10,12 @@ export default {
         'book-img' : "url(/images/home-img/1426929.webp)"
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'], 
-        pacifico: ['Pacifico', 'cursive'],
+        noto: ['Noto Sans', 'sans-serif'],
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
 }
 

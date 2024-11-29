@@ -30,7 +30,7 @@ const Login = () => {
         setMessageLogin(result?.data?.message)
         localStorage.setItem('Full_name', JSON.stringify(result?.data?.data?.fullName))
         localStorage.setItem('Token', JSON.stringify(result?.data?.data?.accessToken))
-        result?.data ? window.location.href = "http://localhost:5173/learning " : ''
+         lazyload
       })   
     } catch (error) {
       setMessageLogin(error?.response?.data?.message)
@@ -41,8 +41,8 @@ const Login = () => {
       <div className="flex h-screen w-full items-center justify-center bg-gradient-to-r from-pink-400 to-blue-600">
         <div className="flex h-auto w-[35rem] flex-col bg-white p-6">
           <div className="mb-5 flex w-full">
-            <img src="/images/pngtree.png" className="w-[8rem]" />
-            <p className="ml-3 flex items-center justify-center text-3xl font-bold font-mono">
+            <img src="/images/pngtree.png" className="w-[8rem] lazyload" />
+            <p className="ml-3 flex items-center justify-center text-3xl font-bold font-noto">
               Chào mừng bạn tới Duylingo
             </p>
           </div>
@@ -60,7 +60,7 @@ const Login = () => {
               type="text"
               placeholder="Email"
               name="email"
-              className="mb-[1rem] w-full border border-inherit p-2 pl-3 outline-none font-mono"
+              className="mb-[1rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
             />
             <br />
             {errors.email && (
@@ -82,7 +82,7 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Mật khẩu"
                 name="password"
-                className="mb-[1rem] w-full border border-inherit p-2 pl-3 outline-none font-mono"
+                className="mb-[1rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
               />
               {showPassword ? (
                 <i
@@ -106,27 +106,27 @@ const Login = () => {
               {isSubmitting ? 'Đang gửi' : 'Đăng Nhập'}
             </button>
             {messageLogin && (
-              <p className="mt-1 w-full text-center text-xl text-red-500 font-mono">
+              <p className="mt-1 w-full text-center text-xl text-red-500 font-noto">
                 {messageLogin}
               </p>
             )}
           </form>
-          <Link to="/forgot_password" className="mt-[0.3rem] w-full cursor-pointer text-sky-500 font-mono">
+          <Link to="/forgot_password" className="mt-[0.3rem] w-full cursor-pointer text-sky-500 font-noto">
             Quên mật khẩu?
           </Link>
-          <p className="mt-2 font-mono">
+          <p className="mt-2 font-noto">
             Bạn chưa có đã có tài khoản?{" "}
-            <Link to="/register" className="text-[1.1rem] font-bold font-mono text-blue-700">
+            <Link to="/register" className="text-[1.1rem] font-bold font-noto text-blue-700">
               Đăng Ký
             </Link>
           </p>
           <div className="mt-4 w-full md:flex md:flex-row">
-            <div className="flex cursor-pointer justify-center bg-[#dfe8e7] hover:text-white p-3 font-medium font-mono md:mr-1 md:w-1/2">
-              <img src="images/logo/googlelogo.png" className="mr-2 h-6 w-6" />
+            <div className="flex cursor-pointer justify-center bg-[#dfe8e7] hover:text-white p-3 font-medium font-noto md:mr-1 md:w-1/2">
+              <img src="images/logo/googlelogo.png" className="mr-2 h-6 w-6 lazyload" />
               Đăng nhập bằng Google
             </div>
             <div className="mt-1 flex cursor-pointer justify-center bg-[#8b8fde] hover:text-black p-3 font-medium text-white md:mt-0 md:w-1/2">
-              <img src="images/logo/facebook.webp" className="mr-2 h-6 w-6 font-mono" />
+              <img src="images/logo/facebook.webp" className="mr-2 h-6 w-6 font-noto lazyload" />
               Đăng nhập bằng Facebook
             </div>
           </div>

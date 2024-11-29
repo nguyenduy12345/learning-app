@@ -73,6 +73,15 @@ const Milestone = () => {
   useEffect(() => {
     const fetchMilestone = async () => {
       try {
+        const indexCourse = courseOfLearningProcess?.findIndex(
+          (course) => course.courseId._id.toString() === courseId.toString(),
+        );
+        const indexSection = courseOfLearningProcess[
+          indexCourse
+        ]?.sections?.findIndex(
+          (section) => section.sectionId.toString() === sectionId.toString(),
+        );
+        if(indexSection > -1) return
         if(milestones.length === 0) return
         await instance.patch(`learning_process/update_section`,{
           courseId,
@@ -123,8 +132,27 @@ const Milestone = () => {
   });
   // Get information of this milestone
   const handleShowInfoMilestone = async (item, indexMilestone, id) => {
+    const indexCourse = courseOfLearningProcess?.findIndex(
+      (course) => course.courseId._id.toString() === courseId.toString(),
+    );
+    const indexSection = courseOfLearningProcess[
+      indexCourse
+    ]?.sections?.findIndex(
+      (section) => section.sectionId.toString() === sectionId.toString(),
+    );
+    const index = courseOfLearningProcess[indexCourse]?.sections[
+      indexSection
+    ]?.milestones?.findIndex(
+      (milestone) => milestone.milestoneId.toString() === id.toString(),
+    );
     if (countRequest === 1) return;
-    setMilestoneId(id);
+    if(id.toString() === milestoneId?.toString()){
+      milestones[indexMilestone].show = !milestones[indexMilestone].show;
+      setMilestones([...milestones]);
+      setCountRequest(0)
+      return
+    }
+    setMilestoneId(id)
     if (item.show) {
       milestones.map((item) => (item.show = false));
       setMilestones([...milestones]);
@@ -140,19 +168,6 @@ const Milestone = () => {
       setCountRequest(0);
       return;
     }
-    const indexCourse = courseOfLearningProcess?.findIndex(
-      (course) => course.courseId._id.toString() === courseId.toString(),
-    );
-    const indexSection = courseOfLearningProcess[
-      indexCourse
-    ]?.sections?.findIndex(
-      (section) => section.sectionId.toString() === sectionId.toString(),
-    );
-    const index = courseOfLearningProcess[indexCourse]?.sections[
-      indexSection
-    ]?.milestones?.findIndex(
-      (milestone) => milestone.milestoneId.toString() === id.toString(),
-    );
     // Only for milestone at the first
     if (indexMilestone === 0) {
       if (index > -1) {
@@ -267,13 +282,14 @@ const Milestone = () => {
           setIsLesson={setIsLesson}
           lessons={lessons}
           currentLesson={currentLesson}
+          setCurrentLesson={setCurrentLesson}
         />
       ) : (
         <MainLayout>
-          <div className="absolute top-[5rem] m-[0.5rem] w-full font-mono md:left-[5.5rem] md:w-[51vw] lg:left-[17rem] lg:w-[40vw] xl:w-[50vw] 2xl:w-[52vw]">
+          <div className="absolute top-[5rem] m-[0.5rem] w-full font-noto scrollbar-none md:left-[5.5rem] md:w-[49vw] lg:left-[17rem] lg:w-[39vw] xl:w-[50vw] 2xl:w-[52vw]">
             <div className="fixed top-[3.8rem] z-10 h-[5rem] w-full bg-white"></div>
             <div
-              className={`fixed top-[4.7rem] z-10 flex h-[5.5rem] lg:h-[6.5rem] w-[97%] gap-[5px] rounded-2xl border-b-4 border-b-[#546b44] md:border-none bg-[#58cc02] pl-4 md:top-[5rem] md:w-[50vw] lg:w-[40vw] xl:w-[49vw]`}
+              className={`fixed top-[4.7rem] z-10 flex h-[5.5rem] lg:h-[6.5rem] w-[97%] gap-[5px] rounded-2xl border-b-4 border-b-[#546b44] md:border-none bg-[#58cc02] pl-4 md:top-[5rem] md:w-[47vw] lg:w-[38vw] xl:w-[46vw] 2xl:w-[50 lazyloadvw]`}
             >
               <div className="flex-grow flex flex-col justify-center ml-[0.4rem] sm:ml-[1.5rem]">
                 <div className="flex text-white">
@@ -281,19 +297,19 @@ const Milestone = () => {
                     onClick={() => navigate("/learning")}
                     className="fa-solid fa-arrow-left mr-3 flex cursor-pointer items-center text-sm md:text-lg xl:text-2xl hover:text-blue-500"
                   ></i>
-                  <p className="text-sm sm:text-md lg:text-lg xl:text-xl font-black flex items-center justify-center font-mono">
+                  <p className="text-sm sm:text-md lg:text-lg xl:text-xl font-medium flex items-center justify-center font-noto">
                     Phần {+getIndexSection + 1}
                   </p>
                 </div>
                 <div className="mt-2">
-                  <p className="text-sm sm:text-md lg:text-lg xl:text-xl font-mono font-black text-white">
+                  <p className="text-sm sm:text-md lg:text-lg xl:text-xl font-noto font-medium text-white">
                     {currentSection?.name}
                   </p>
                 </div>
               </div>
               <div className="border-l-[2px] border-l-white w-[4rem] xl:w-[12rem] h-full text-white flex justify-center items-center cursor-pointer hover:text-blue-500">
                 <i className="fa-sharp fa-solid fa-book text-3xl"></i>
-                <p className="hidden xl:block text-xl font-black ml-2">Hướng dẫn</p>
+                <p className="hidden xl:block text-xl font-medium ml-2">Hướng dẫn</p>
               </div>
             </div>
             <div className="absolute top-[4rem] mx-auto flex w-[98%] flex-col gap-20 overflow-x-hidden overflow-y-hidden rounded-2xl md:top-[6rem] lg:gap-24">
@@ -304,14 +320,13 @@ const Milestone = () => {
                     onClick={() =>
                       handleShowInfoMilestone(item, index, item._id)
                     }
-                    // style={{ top: index ? `${index * 3 * 2}rem` : "0" }}
                     className={`relative mt-12 flex ${index % 2 ? "left-[66%]" : "left-[15%] sm:left-[20%]"} shadow-2xl`}
                   >
                     <li
-                      className={`absolute top-[0.4rem] z-0 h-[5.5rem] w-[5.5rem] rounded-full bg-[#96f5e8] md:top-[0.4rem]`}
+                      className={`absolute top-[0.4rem] z-0 h-[5.5rem] w-[5.5rem] rounded-full ${index === 0 ? "bg-[#46a302]" : milestones[index - 1]?.status === 2 ? "bg-[#46a302]" : item.status === 0 ? "bg-[#b7b7b7]" : ""} md:top-[0.4rem]`}
                     ></li>
                     <li
-                      className={`absolute flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full text-center text-lg text-blue-100 md:text-xl ${index === 0 ? "bg-[#58cc02]" : milestones[index - 1]?.status === 2 ? "bg-[#58cc02]" : item.status === 0 ? "bg-[#d0e4ed]" : ""} font-xl md:2xl cursor-pointer p-3 font-mono shadow-2xl transition-all active:translate-y-[0.5rem]`}
+                      className={`absolute flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full text-center text-lg text-blue-100 md:text-xl ${index === 0 ? "bg-[#58cc02]" : milestones[index - 1]?.status === 2 ? "bg-[#58cc02]" : item.status === 0 ? "bg-[#e5e5e5]" : ""} font-xl md:2xl cursor-pointer p-3 font-noto shadow-2xl transition-all active:translate-y-[0.5rem]`}
                     >
                       {item.show ? (
                         ""
@@ -328,19 +343,14 @@ const Milestone = () => {
                       ) : (
                         ""
                       )}
-                      <div
-                        className="h-[60%] w-[80%] bg-white"
-                        style={{
-                          clipPath: `polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)`,
-                        }}
-                      ></div>
+                      <img src= "/images/logo/white-star.png" className="w-[3rem] lazyload"/>
                       {item.status === 1 ? (
                         <div
                           style={{
                             clipPath:
                               "polygon(0% 0%, 100% 0%, 100% 93%, 51% 93%, 34% 100%, 25% 93%, 0 93%)",
                           }}
-                          className={`${item.show ? "hidden" : " "} absolute -right-12 -top-5 flex h-[2.3rem] w-[8rem] animate-bounce items-center justify-center rounded-md bg-white border-[2px] border-[#e5e5e5] font-mono text-sm font-black text-[#58cc02]`}
+                          className={`${item.show ? "hidden" : " "} absolute -right-12 -top-5 flex h-[2.3rem] w-[8rem] animate-bounce items-center justify-center rounded-md bg-white border-[2px] border-[#e5e5e5] font-noto text-sm font-medium text-[#58cc02]`}
                         >
                           Chơi tiếp
                         </div>
@@ -350,7 +360,7 @@ const Milestone = () => {
                             clipPath:
                               "polygon(0% 0%, 100% 0%, 100% 93%, 51% 93%, 34% 100%, 25% 93%, 0 93%)",
                           }}
-                          className={`${item.show ? "hidden" : " "} absolute -right-12 -top-5 flex h-[2.3rem] w-[8rem] animate-bounce items-center justify-center rounded-md bg-white border-[2px] border-[#e5e5e5] font-mono text-sm font-black text-[#58cc02]`}
+                          className={`${item.show ? "hidden" : " "} absolute -right-12 -top-5 flex h-[2.3rem] w-[8rem] animate-bounce items-center justify-center rounded-md bg-white border-[2px] border-[#e5e5e5] font-noto text-sm font-medium text-[#58cc02]`}
                         >
                           Hoàn Thành
                         </div>
@@ -362,43 +372,51 @@ const Milestone = () => {
                           className={`absolute ${index % 2 ? "-left-[11.5rem] top-2 lg:-left-[13.5rem]" : "left-[6rem] top-2"} w-[11rem] rounded-lg bg-[#eeeeee] p-1 text-black shadow-2xl lg:w-[13rem]`}
                         >
                           {item.status === 2 ? (
-                            <p className="mt-2 font-mono text-sm font-bold lg:text-lg">
+                            <p className="mt-2 font-noto text-sm font-medium lg:text-lg">
                               Bạn nhận đã được:{" "}
                             </p>
-                          ) : (
-                            <div className="mb-1 text-center font-mono text-sm font-bold lg:text-lg">
+                          ) : item.status === 1 ? (
+                            <div className="mb-1 text-center font-noto text-sm font-medium lg:text-lg">
                               <span>Bài học: </span>
-                              <span>{`${currentLesson} / 6`}</span>
+                              <span>{`${currentLesson} / ${lessons?.length}`}</span>
+                            </div>
+                          ) : (
+                            <div className="mb-1 w-full h-[2.5rem] flex items-center justify-center text-center font-noto text-sm font-medium lg:text-lg">
+                              <div className="w-full h-full flex justify-center items-center">
+                                <i className="fa-solid fa-lock"></i>
+                                <span className="ml-2"> Đã bị khóa</span>
+                              </div>
                             </div>
                           )}
+                          {item.status === 2 || item.status === 1 ?
                           <ul className="mx-auto mb-2 flex w-[80%] justify-around text-left text-sm font-bold">
                             <li className="flex items-center justify-center text-sm text-yellow-600 sm:text-xl">
                               {gems}
                               <img
                                 src="/images/logo/coins.png"
-                                className="ml-1 h-3 w-3 lg:h-5 lg:w-5"
+                                className="ml-1 h-3 w-3 lg:h-5 lg:w-5 lazyload"
                               />
                             </li>
                             <li className="flex items-center justify-center text-sm text-green-700 sm:text-xl">
                               {experiences}
                               <img
                                 src="/images/logo/explogo.jfif"
-                                className="ml-1 h-3 w-3 lg:h-5 lg:w-5"
+                                className="ml-1 w-3 lg:w-6 lazyload"
                               />
                             </li>
-                          </ul>
+                          </ul> : ''}
                           {item?.status === 2 ? (
-                            <button className="w-full cursor-pointer rounded-lg bg-[#58cc02] py-1 font-mono text-md font-black text-white shadow-xl transition">
+                            <button className="w-full cursor-pointer rounded-lg bg-[#58cc02] py-1 font-noto text-md font-medium text-white shadow-xl transition">
                               Hoàn thành
                             </button>
-                          ) : (
+                          ) : item?.status === 1 ? (
                             <button
                               onClick={() => handleStartLesson()}
-                              className="w-full cursor-pointer rounded-lg bg-[#58cc02] py-1 font-mono text-md font-black text-white shadow-xl transition hover:bg-blue-600 hover:text-green-600 focus:outline-none"
+                              className="w-full cursor-pointer rounded-lg bg-[#58cc02] py-1 font-noto text-md font-medium text-white shadow-xl transition hover:text-green-600 focus:outline-none"
                             >
                               Bắt đầu
                             </button>
-                          )}
+                          ): ''}
                         </div>
                       )}
                     </li>

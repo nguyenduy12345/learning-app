@@ -105,28 +105,28 @@ const Learning = () => {
                 >
                   <div className="flex h-full w-full flex-col-reverse justify-between 2xl:flex-row">
                     <div
-                      className={`mt-2 flex h-[6rem] w-full flex-col justify-between bg-white px-5 py-3 md:px-6 md:py-2 2xl:mt-0 2xl:h-[90%] 2xl:w-[48%] 2xl:rounded-bl-3xl 2xl:rounded-tl-3xl 2xl:p-[2rem] ${section?.status === 1 || section?.status === 2 ? "2xl:bg-[#ddf4ff]" : "2xl:bg-[#f7f7f7]"} z-10 rounded-bl-3xl rounded-br-3xl`}
+                      className={`mt-2 flex h-[6rem] w-full flex-col justify-between bg-white px-5 py-3 md:px-6 md:py-2 2xl:mt-0 2xl:h-[90%] 2xl:w-[58%] 2xl:rounded-bl-3xl 2xl:rounded-tl-3xl 2xl:p-[2rem] ${section?.status === 1 || section?.status === 2 ? "2xl:bg-[#ddf4ff]" : "2xl:bg-[#f7f7f7]"} z-10 rounded-bl-3xl rounded-br-3xl`}
                     >
                       <div className="">
-                        <p className="font-mono text-xl font-black text-[#5f5f5f] lg:text-3xl">
+                        <p className="font-noto text-xl font-medium text-[#5f5f5f] lg:text-3xl">
                           {`Phần ${index + 1}`}
                         </p>
                         {section?.status === 1 || section?.status === 2 ? (
-                          <div className="flex mt-1 2xl:mt-5 mx-auto w-[90%] items-center justify-center font-mono">
+                          <div className="flex mt-1 2xl:mt-5 mx-auto w-[100%] items-center justify-center font-noto">
                             <div className="relative h-4 w-full rounded-xl bg-[#f3d2d2] 2xl:bg-[#f9f9f9]">
                               <div 
                                 style={{
                                   width: `${(section.totalMilestoneDone / section.totalMilestone) * 100}%`,
                                 }}
-                                className={`absolute z-10 top-[1px] h-[14px] rounded-xl bg-green-600 transition ease-linear`}></div>
-                              <span className="absolute top-[0] left-[50%] -translate-x-1/2 text-xs font-medium">{`${section.totalMilestoneDone} / ${section.totalMilestone}`}</span>
+                                className={`absolute z-10 top-[1px] h-[14px] rounded-xl bg-[#58cc02] transition ease-linear`}></div>
+                              <span className="absolute top-[0] left-[50%] -translate-x-1/2 text-xs font-medium text-[#b2afaf]">{`${section.totalMilestoneDone} / ${section.totalMilestone}`}</span>
                             </div>
-                            <div className="relative ml-2 h-8 w-10 rounded-full bg-green-500 p-[2px]">
+                            <div className="relative ml-[0px] h-8 w-9 rounded-full bg-[#58cc02] p-[2px] border-[3px] border-white">
                               <div
                                 style={{
                                   clipPath: `polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)`,
                                 }}
-                                className="absolute left-1/2 top-1/2 z-10 h-7 w-7 -translate-x-1/2 -translate-y-1/2 bg-white"
+                                className="absolute left-1/2 top-1/2 z-10 h-6 w-6 -translate-x-1/2 -translate-y-1/2 bg-white"
                               ></div>
                             </div>
                           </div>
@@ -144,22 +144,22 @@ const Learning = () => {
                         )}
                       </div>
                       {section?.status === 1 ? (
-                        <div className="hidden 2xl:flex mx-auto h-[2rem] w-[50%] items-center justify-center rounded-lg bg-[#1cb0f6] px-2 font-mono text-lg font-bold text-white shadow-lg hover:bg-[#3181a5] hover:shadow-xl md:text-xl 2xl:h-[3rem] 2xl:w-full">
+                        <div className="hidden 2xl:flex mx-auto h-[2rem] w-[50%] items-center justify-center rounded-lg bg-[#1cb0f6] px-2 font-noto text-lg font-bold text-white shadow-lg hover:bg-[#3181a5] hover:shadow-xl md:text-xl 2xl:h-[3rem] 2xl:w-full">
                           Tiếp tục
                         </div>
                       ) : section?.status === 2 ? (
-                        <div className="hidden 2xl:flex mx-auto h-[2rem] w-[50%] items-center justify-center rounded-lg bg-green-400 px-2 font-mono text-lg font-bold shadow-lg hover:shadow-xl md:text-2xl 2xl:h-[3rem] 2xl:w-full">
+                        <div className="hidden 2xl:flex mx-auto h-[2rem] w-[50%] items-center justify-center rounded-lg bg-green-400 px-2 font-noto text-lg font-bold shadow-lg hover:shadow-xl md:text-2xl 2xl:h-[3rem] 2xl:w-full">
                           Hoàn thành
                         </div>
                       ) : (
-                        <div className="hidden 2xl:flex mx-auto h-[2rem] w-[50%] items-center justify-center rounded-lg bg-[#eeeeee] px-2 font-mono text-lg font-bold shadow-lg hover:shadow-xl hover:text-green-400 md:text-xl 2xl:h-[3rem] 2xl:w-full">
+                        <div className="hidden 2xl:flex mx-auto h-[2rem] w-[50%] items-center justify-center rounded-lg bg-[#eeeeee] px-2 font-noto text-lg font-bold shadow-lg hover:shadow-xl hover:text-green-400 md:text-xl 2xl:h-[3rem] 2xl:w-full">
                           <i className="fa-solid fa-lock-open"></i>
                           <span className="ml-2">Mở phần học {index + 1}</span>
                         </div>
                       )}
                     </div>
-                    <div className="relative mt-7 flex-grow items-start justify-center overflow-hidden 2xl:flex 2xl:flex-col 2xl:pr-5">
-                      <div className="text-md relative mx-auto flex h-[60%] w-[90%] rounded-xl bg-white p-2 text-center font-mono font-medium text-[#4b4b4b] md:text-lg 2xl:h-[30%] 2xl:w-[95%]">
+                    <div className="relative mt-7 2xl:w-[45%] flex-grow items-start justify-center overflow-hidden 2xl:flex 2xl:flex-col 2xl:pr-5">
+                      <div className="text-md relative mx-auto flex h-[60%] w-[90%] rounded-xl bg-white p-2 text-center font-noto font-medium text-[#4b4b4b] md:text-lg 2xl:h-[30%] 2xl:w-[95%]">
                         <p className="flex h-full w-full items-center justify-center text-center">
                           {section?.name}
                         </p>
@@ -173,7 +173,7 @@ const Learning = () => {
                       <div className="flex w-full justify-end 2xl:justify-center">
                         <img
                           src="/images/logo/pngtree-black-cat.png"
-                          className="w-[6rem] md:w-[8rem] 2xl:w-[12rem]"
+                          className="w-[6rem] md:w-[8rem] 2xl:w-[12rem] lazyload"
                         />
                       </div>
                     </div>

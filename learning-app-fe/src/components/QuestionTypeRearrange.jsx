@@ -4,7 +4,7 @@ import { UserInfo } from "../stores/user.store.jsx";
 
 import instance from "../utils/axiosRequest.js";
 
-const QuestionTypeChoose = ({ question, lessonId, handleNextQuestion }) => {
+const QuestionTypeRearrange = ({ question, lessonId, handleNextQuestion }) => {
   const {
     setFetchProfile,
     lessonsOfSummaryLesson,
@@ -12,59 +12,51 @@ const QuestionTypeChoose = ({ question, lessonId, handleNextQuestion }) => {
   } = useContext(UserInfo);
   const [correct, setCorrect] = useState();
   const [choose, setChoose] = useState();
-  const [answers, setAnswers] = useState([]);
+  const [listWord, setListWord] = useState([])
+  const [words, setWords] = useState([]);
   const [countRequest, setCountRequest] = useState(0);
   const [message, setMessage] = useState("");
   useEffect(() => {
-    const converToArrObj = question?.answers.map((answer) => {
+    const converToArrObj = question?.words?.map((word) => {
       return {
-        answer,
+        word,
         selected: false,
       };
     });
-    setAnswers(converToArrObj);
+    setWords(converToArrObj);
   }, [question]);
-  const renderStatus = (index) => {
-    switch (index) {
-      case 0:
-        return "A.";
-      case 1:
-        return "B.";
-      case 2:
-        return "C.";
-      default:
-        return "D.";
-    }
-  };
-  const handleChooseAnswer = (index) => {
-    answers.map((item) => (item.selected = false));
-    answers[index].selected = true;
-    setAnswers([...answers]);
-    setChoose(index + 1);
+  const handleSelectWord = (word, index) => {
+    if(word.selected) return
+    words[index].selected = true;
+    setWords([...words]);
+    setListWord([...listWord, word.word]);
   };
   const handleReplayQuestion = () => {
-    const converToArrObj = question?.answers.map((answer) => {
+    const converToArrObj = question?.words.map((word) => {
       return {
-        answer,
+        word,
         selected: false,
       };
     });
-    setAnswers(converToArrObj);
+    setWords(converToArrObj);
     setCorrect(undefined);
-    setChoose(undefined);
+    setListWord([]);
     setCountRequest(0);
   };
   const handleCheckQuestion = async () => {
     if (countRequest === 1) return;
     setCountRequest(1);
-    if (!choose) {
-      setMessage("Bạn chưa chọn đáp án!");
+    if (listWord.length === 0) {
+      setMessage("Hãy chọn từ để sắp xếp");
       setTimeout(() => setMessage(""), 1500);
       setCountRequest(0);
       return;
     }
+    const answer = listWord.join(" ") + "."
     try {
-      const result = await instance.post(`questions/${question._id}`, {answer: choose - 1} )
+      const result = await instance.post(`questions/${question._id}`, 
+        {answer} 
+      )
       if (result.data.data.correct) {
         setCountRequest(0);
         setCorrect(true);
@@ -114,7 +106,7 @@ const QuestionTypeChoose = ({ question, lessonId, handleNextQuestion }) => {
     if (correct) {
       handleNextQuestion();
       setCorrect(undefined);
-      setChoose(undefined);
+      setListWord([]);
       setCountRequest(0);
     }
   };
@@ -123,43 +115,47 @@ const QuestionTypeChoose = ({ question, lessonId, handleNextQuestion }) => {
       {question && (
         <>
           <div className="mx-auto mb-2 mt-3 h-full w-full px-5 md:mt-7 md:w-[65%] md:px-0">
-            <p className="mb-2 text-center font-noto font-bold md:text-2xl">
-              Chọn đáp án đúng
+            <p className="text-center font-noto font-bold md:text-xl">
+              Sắp xếp các từ bên dưới thành câu đúng nghĩa với câu đã cho:
             </p>
             <div className="">
               <div className="flex">
                 <img
-                  src="/images/meo_image_learning.png"
+                  src="/images/logo/speaker.png"
                   alt=""
-                  className="mr-2 h-10 w-10 md:mr-5 md:h-24 md:w-24 lazyload"
+                  className="mr-2 h-10 w-10 md:mr-2 md:h-16 md:w-16 lazyload"
                 />
                 <p className="flex items-end font-noto md:text-xl">
-                  {question?.question}
+                  : " {question?.document} "
                 </p>
               </div>
-
-              <div className="mt-2 flex w-full items-center justify-center">
-                <ul className="mt-4 grid w-[80%] grid-cols-1 gap-4 sm:grid-cols-2 md:mt-6 md:w-full">
-                  {answers &&
-                    answers.map((answer, index) => (
-                      <li
-                        onClick={() => handleChooseAnswer(index)}
-                        key={index}
-                        className={`border-1 cursor-pointer rounded-lg py-4 pl-2 pr-8 font-medium ${answer.selected ? "bg-[#d7ffb8]" : "bg-[#eeeeee]"} px-2 hover:bg-[#d7ffb8] md:text-xl`}
-                      >
-                        <span className="pl-3 font-noto font-medium">
-                          {renderStatus(index)}
-                        </span>
-                        <span className="font-noto">{answer.answer}</span>
-                      </li>
-                    ))}
+              <div className="w-full flex px-4 items-center justify-center gap-1 h-[6rem] mt-3 rounded-xl border-2 border-[#e5e5e5]">
+                <div className="px-4 h-auto flex flex-wrap gap-2 border-b-[1px] border-[#9f8c8c] text-md lg:text-lg">
+                  {listWord && listWord?.map((word, index) => (
+                  <p key={index}>
+                    {word}
+                  </p>
+                  ))}
+                </div>
+                
+              </div>
+              <div className="mt-4 flex w-full items-center justify-center">
+                <ul className="flex w-full flex-wrap justify-evenly gap-1 lg:w-5/6 md:gap-2">
+                {words?.map((word, index) => (
+                    <li 
+                      key={index}
+                      onClick={() => handleSelectWord(word, index)}
+                      className="border-1 cursor-pointer rounded-lg border-[2px] h-[2.5rem] border-[#e5e5e5] px-6 lg:px-8 py-1 lowercase hover:bg-green-400 text-md lg:text-lg">
+                      {word.selected === false && word.word ? word.word : " "}
+                    </li>
+                   ))}
                 </ul>
               </div>
             </div>
           </div>
 
           <div
-            className={`fixed bottom-0 h-[10rem] lg:h-[13rem] w-full ${correct === true ? "bg-[#d7ffb8]" : correct === false ? "bg-[#ffdfe0]" : "bg-[#ffffff]"} border-t-2 border-t-[#e5e5e5] px-3 py-2 md:mt-6 md:px-0 md:py-3`}
+            className={`fixed bottom-0 h-[10rem] w-full ${correct === true ? "bg-[#d7ffb8]" : correct === false ? "bg-[#ffdfe0]" : "bg-[#ffffff]"} border-t-2 border-t-[#e5e5e5] px-3 py-2 md:mt-6 md:px-0 md:py-3`}
           >
             <div className="relative mx-auto flex w-full justify-between md:w-[65%]">
               <div className="cursor-pointer">
@@ -194,7 +190,7 @@ const QuestionTypeChoose = ({ question, lessonId, handleNextQuestion }) => {
                 ) : (
                   <button
                     onClick={handleCheckQuestion}
-                    className={`flex transform cursor-pointer items-center justify-center rounded-lg ${choose ? "bg-[#58cc02] text-white" : `bg-[#e5e5e5] text-[#afafaf]`} px-6 py-2 font-noto font-medium transition-all duration-300 hover:scale-105 active:scale-95 md:px-6 md:py-3 md:text-lg md:font-bold`}
+                    className={`flex transform cursor-pointer items-center justify-center rounded-lg ${listWord.length > 0 ? "bg-[#58cc02] text-white" : `bg-[#e5e5e5] text-[#afafaf]`} px-6 py-2 font-noto font-medium transition-all duration-300 hover:scale-105 active:scale-95 md:px-6 md:py-3 md:text-lg md:font-bold`}
                   >
                     Kiểm tra đáp án
                   </button>
@@ -224,4 +220,4 @@ const QuestionTypeChoose = ({ question, lessonId, handleNextQuestion }) => {
   );
 };
 
-export default QuestionTypeChoose;
+export default QuestionTypeRearrange;

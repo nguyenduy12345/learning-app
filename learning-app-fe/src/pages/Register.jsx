@@ -42,7 +42,7 @@ const Register = () => {
       .then((result) => {
         localStorage.setItem('Full_name', JSON.stringify(fullName))
         localStorage.setItem('Token', JSON.stringify(result?.data?.data?.accessToken))
-        navigate('/learning')
+        result?.data ? window.location.href = "http://localhost:5173/learning " : ''
       })      
     } catch (error) {
       setMessageRegister(error?.response?.data?.message)
@@ -52,7 +52,7 @@ const Register = () => {
     <div className="flex h-screen w-full items-center justify-center bg-gradient-to-r from-pink-400 to-blue-600">
       <div className="flex h-auto w-[35rem] flex-col bg-white p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h4 className="mb-4 w-full text-center text-3xl font-bold font-mono">
+          <h4 className="mb-4 w-full text-center text-3xl font-bold font-noto">
             Tạo tài khoản
           </h4>
           <input
@@ -73,7 +73,7 @@ const Register = () => {
             })}
             type="text"
             placeholder="Họ và tên"
-            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-mono"
+            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
           />
           <br />
           {errors.fullName && (
@@ -91,7 +91,7 @@ const Register = () => {
             })}
             type="text"
             placeholder="Email"
-            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-mono"
+            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
           />
           <br />
           {errors.email && (
@@ -114,7 +114,7 @@ const Register = () => {
               })}
               type={showPassword ? "text" : "password"}
               placeholder="Mật khẩu"
-              className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-mono"
+              className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
             />
             {showPassword ? (
               <i
@@ -129,7 +129,7 @@ const Register = () => {
             )}
             <br />
             {errors.password && (
-              <p className="mb-2 text-red-500 font-mono">{errors.password.message}</p>
+              <p className="mb-2 text-red-500 font-noto">{errors.password.message}</p>
             )}
           </div>
           <div className="relative">
@@ -141,7 +141,7 @@ const Register = () => {
               name="rePassword"
               type={showPassword ? "text" : "password"}
               placeholder="Xác nhận mật khẩu"
-              className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-mono"
+              className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
             />
             {showPassword ? (
               <i
@@ -156,46 +156,46 @@ const Register = () => {
             )}
             <br />
             {errors.rePassword && (
-              <p className="mb-2 text-red-500 font-mono">{errors.rePassword.message}</p>
+              <p className="mb-2 text-red-500 font-noto">{errors.rePassword.message}</p>
             )}
             {messagePassword && (
-              <p className="mb-2 text-red-500 font-mono">{messagePassword}</p>
+              <p className="mb-2 text-red-500 font-noto">{messagePassword}</p>
             )}
           </div>
-          <button className="h-16 w-full bg-gradient-to-r from-pink-400 to-blue-600 p-2 text-2xl font-bold text-white hover:text-black font-mono">
+          <button className="h-16 w-full bg-gradient-to-r from-pink-400 to-blue-600 p-2 text-2xl font-bold text-white hover:text-black font-noto">
             {isSubmitting ? "Đang Gửi..." : "Đăng Ký"}
           </button>
           {messageRegister && (
-            <p className="mb-2 p-1 text-center text-red-500 font-mono">
+            <p className="mb-2 p-1 text-center text-red-500 font-noto">
               {messageRegister}
             </p>
           )}
         </form>
-        <p className="mt-2 font-mono">
+        <p className="mt-2 font-noto">
           Bạn đã có tài khoản?{" "}
-          <Link to="/login" className="text-[1.1rem] font-bold font-mono text-blue-700">
+          <Link to="/login" className="text-[1.1rem] font-bold font-noto text-blue-700">
             Đăng nhập
           </Link>
         </p>
-        <p className="mt-3 font-mono">
+        <p className="mt-3 font-noto">
           Khi đăng ký trên Duylingo, bạn đã đồng ý với{" "}
-          <Link to="" className="font-medium font-mono">
+          <Link to="" className="font-medium font-noto">
             Các chính sách
           </Link>
             và 
-          <Link to="" className="font-medium font-mono">
+          <Link to="" className="font-medium font-noto">
             Chính sách bảo mật
           </Link>
            của chúng tôi.
         </p>
-        <p className="mt-3 font-mono">
+        <p className="mt-3 font-noto">
           Trang này được bảo vệ bởi tập đoàn{" "}
-          <span className="font-medium font-mono">reCAPTCHA</span> và theo{" "}
-          <Link to="" className="font-medium font-mono">
+          <span className="font-medium font-noto">reCAPTCHA</span> và theo{" "}
+          <Link to="" className="font-medium font-noto">
             Chính sách bảo mật
           </Link>
             và{" "}
-          <Link to="" className="font-medium font-mono">
+          <Link to="" className="font-medium font-noto">
             Điều khoản dịch vụ của Google
           </Link>
            .

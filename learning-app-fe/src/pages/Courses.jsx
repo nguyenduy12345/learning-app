@@ -66,7 +66,7 @@ const Courses = () => {
   return (
     <MainLayout>
       <div className="mt-[5rem] p-[0.8rem] md:absolute md:left-[5.5rem] lg:left-[17rem]">
-        <p className="mb-4 font-mono text-xl font-medium md:mb-9">
+        <p className="mb-4 font-noto text-xl font-medium md:mb-9">
           Hãy lựa chọn các khóa học bạn cần:{" "}
         </p>
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
@@ -74,11 +74,7 @@ const Courses = () => {
             listCourse.map((item, index) => (
               <li
                 key={index}
-                className={
-                  item.status === 0
-                    ? "relative cursor-default rounded-lg bg-[#eeeeee] shadow-xl hover:shadow-2xl"
-                    : "relative cursor-pointer rounded-lg shadow-xl hover:shadow-2xl"
-                }
+                className={"relative cursor-pointer rounded-lg bg-[#e5e5e5] shadow-xl hover:shadow-2xl"}
               >
                 <Course
                   handleAddCourse={() => handleAddCourse(item, item._id)}
@@ -87,7 +83,7 @@ const Courses = () => {
                   numOfLearner={item.numOfLearner}
                 />
                 {item.status !== 0 ? (
-                  <p className="absolute right-0 top-0 z-10 flex w-10 cursor-pointer items-center justify-center rounded-bl-lg bg-red-200 font-mono hover:bg-[#eeeeee] hover:text-black">
+                  <p className="absolute right-0 top-0 z-10 flex w-10 cursor-pointer items-center justify-center rounded-bl-lg bg-red-200 font-noto hover:bg-[#eeeeee] hover:text-black">
                     <i className="fa-solid fa-check text-2xl font-bold"></i>
                   </p>
                 ) : null}

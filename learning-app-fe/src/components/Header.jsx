@@ -38,7 +38,7 @@ const Header = () => {
       })
   };
   return (
-    <div className="z-30 fixed w-full top-0 md:w-[90vw] md:left-[5.7rem] lg:left-[17rem] justify-center bg-white py-3 border-b-[1px] border-[#e5e5e5]">
+    <div className="font-noto z-30 fixed w-full top-0 md:w-[90vw] md:left-[5.7rem] lg:left-[17rem] justify-center bg-white py-3 border-b-[1px] border-[#e5e5e5]">
       <ul className="flex flex-wrap gap-2 w-full justify-evenly text-end md:w-[80%] md:justify-evenly">
         <li className="flex items-center justify-center">
           <Listbox value={selected} onChange={setSelected}>
@@ -50,9 +50,9 @@ const Header = () => {
                       <img
                         alt=""
                         src={selected?.image}
-                        className="w-6 h-6 sm:h-7 sm:w-7 shrink-0 rounded-full"
+                        className="w-6 h-6 sm:h-7 sm:w-7 shrink-0 rounded-full lazyload"
                       />
-                      <span className="ml-2 hidden sm:block font-mono">
+                      <span className="ml-2 hidden sm:block ">
                         {selected?.name ? "Tiếng " + selected?.name : ""}
                       </span>
                     </>
@@ -88,9 +88,9 @@ const Header = () => {
                         <img
                           alt=""
                           src={course?.courseId?.image}
-                          className="w-full sm:h-7 sm:w-8 shrink-0"
+                          className="w-full sm:h-7 sm:w-8 shrink-0 lazyload"
                         />
-                        <span className="ml-3 text-[12px] hidden sm:block truncate font-mono font-normal group-data-[selected]:font-semibold">
+                        <span className="ml-3 text-[12px] hidden sm:block truncate  font-normal group-data-[selected]:font-semibold">
                           {"Tiếng " + course?.courseId?.name}
                         </span>
                       </div>
@@ -101,20 +101,20 @@ const Header = () => {
           </Listbox>
         </li>
         <li className="flex items-center justify-center">
-          <img src="/images/logo/explogo.jfif" className="w-5 md:w-7" />
-          <p className="ml-1 font-mono text-md md:text-xl font-medium text-yellow-800 ">
+          <img src="/images/logo/explogo.jfif" className="w-5 md:w-7 lazyload" />
+          <p className="ml-1  text-md md:text-xl font-medium text-yellow-800 ">
             {profile?.experiences ? profile?.experiences : 0}
           </p>
         </li>
         <li className="flex items-center justify-center">
-          <img src="/images/logo/coins.png" className="w-5 md:w-7" />
-          <p className="ml-1 font-mono text-md md:text-xl font-medium text-yellow-800">
+          <img src="/images/logo/coins.png" className="w-5 md:w-7 lazyload" />
+          <p className="ml-1  text-md md:text-xl font-medium text-yellow-800">
             {profile?.gems ? profile?.gems : 0}
           </p>
         </li>
         <li className="flex items-center justify-center">
-          <img src="/images/logo/heart.webp" className="w-5 md:w-7" />
-          <p className="ml-1 font-mono text-md md:text-xl font-medium text-red-600 ">
+          <img src="/images/logo/heart.webp" className="w-5 md:w-7 lazyload" />
+          <p className="ml-1  text-md md:text-xl font-medium text-red-600 ">
             {profile?.hearts ? profile?.hearts : 0}
           </p>
         </li>

@@ -30,7 +30,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
     })
   };
   return (
-    <div className="fixed left-1/3 top-1/3 z-20 mx-auto mt-10 w-[95%] sm:w-96 -translate-x-1/3 -translate-y-1/2 transform rounded-lg bg-white p-6 font-mono shadow-md sm:left-1/2 sm:-translate-x-1/2 md:left-[66%] xl:left-[57%]">
+    <div className="fixed left-1/3 top-1/3 z-20 mx-auto mt-10 w-[95%] sm:w-96 -translate-x-1/3 -translate-y-1/2 transform rounded-lg bg-white p-6 font-noto shadow-md sm:left-1/2 sm:-translate-x-1/2 md:left-[66%] xl:left-[57%]">
       <i
         className="fa-solid fa-xmark-large absolute right-3 top-3 cursor-pointer"
         onClick={() => setIsEditPassword(false)}
@@ -54,7 +54,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
             })}
             type={password ? "text" : "password"}
             placeholder="Mật khẩu"
-            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 font-mono outline-none"
+            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 font-noto outline-none"
           />
           {password ? (
             <i
@@ -69,7 +69,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
           )}
           <br />
           {errors.password && (
-            <p className="mb-2 font-mono text-red-500">
+            <p className="mb-2 font-noto text-red-500">
               {errors.password.message}
             </p>
           )}
@@ -91,7 +91,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
             })}
             type={showPassword ? "text" : "password"}
             placeholder="Mật khẩu mới"
-            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 font-mono outline-none"
+            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 font-noto outline-none"
           />
           {showPassword ? (
             <i
@@ -106,7 +106,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
           )}
           <br />
           {errors.newPassword && (
-            <p className="mb-2 font-mono text-red-500">
+            <p className="mb-2 font-noto text-red-500">
               {errors.newPassword.message}
             </p>
           )}
@@ -120,7 +120,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
             name="confirmPassword"
             type={showPassword ? "text" : "password"}
             placeholder="Xác nhận mật khẩu mới"
-            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 font-mono outline-none"
+            className="mb-[0.5rem] w-full border border-inherit p-2 pl-3 font-noto outline-none"
           />
           {showPassword ? (
             <i
@@ -135,7 +135,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
           )}
           <br />
           {errors.confirmPassword && (
-            <p className="mb-2 font-mono text-red-500">
+            <p className="mb-2 font-noto text-red-500">
               {errors.confirmPassword.message}
             </p>
           )}
@@ -146,7 +146,7 @@ const ChangePassword = ({ setIsEditPassword }) => {
         >
           {isSubmitting ? "Đang lưu..." : "Lưu mật khẩu"}
         </button>
-        <p className="text-center font-mono text-lg text-red-500">{message}</p>
+        <p className="text-center font-noto text-lg text-red-500">{message}</p>
       </form>
     </div>
   );

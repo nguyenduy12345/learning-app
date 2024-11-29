@@ -24,7 +24,7 @@ const Misson = () => {
   const text = "Hoàn thành các nhiệm vụ để nhận rương kho báu. Đảm bảo sẽ có nhiều phần quà hấp dẫn dành cho bạn mỗi ngày!"
   return (
     <MainLayout>
-    <div className="absolute mx-auto mt-[6rem] md:left-[5.5rem] md:w-[51vw] lg:left-[17rem] gap-[1.5rem] lg:w-[42vw] xl:w-[50vw] 2xl:w-[52vw] flex w-[95%] flex-col bg-white font-mono lg:flex-grow lg:flex-row">
+    <div className="absolute mx-auto mt-[6rem] md:left-[5.5rem] md:w-[51vw] lg:left-[17rem] gap-[1.5rem] lg:w-[42vw] xl:w-[50vw] 2xl:w-[52vw] flex w-[95%] flex-col bg-white font-noto lg:flex-grow lg:flex-row">
       <div className="w-full bg-white">
         <div
           className={`mx-auto flex flex-col w-[96%] rounded-2xl bg-[#ddf4ff] p-8 pb-0`}
@@ -34,7 +34,7 @@ const Misson = () => {
           {text.split(" ").map((char, index) => (<span key={index} className="letter">{char + " "}</span>))}
           </p>
           <div className='w-full flex justify-end items-end'>
-            <img src="/images/cat_congru2.png" className='w-28'/>
+            <img src="/images/cat_congru2.png" className='w-28 lazyload'/>
           </div>
         </div>
         <div className="mx-auto mt-6 w-[95%]">
@@ -49,7 +49,7 @@ const Misson = () => {
               </li>
             </ul>
             <div className="ml-4 flex items-center justify-center">
-              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9" />
+              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9 lazyload" />
             </div>
           </li>
           <li className="flex w-full h-[7rem] border-[1px] border-[#e5e5e5] p-4 rounded-xl">
@@ -61,7 +61,7 @@ const Misson = () => {
               </li>
             </ul>
             <div className="ml-4 flex items-center justify-center">
-              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9" />
+              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9 lazyload" />
             </div>
           </li>
         </ul>

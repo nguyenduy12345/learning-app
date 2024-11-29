@@ -7,6 +7,7 @@ import instance from "../utils/axiosRequest.js";
 import QuestionTypeChoose from "../components/QuestionTypeChoose.jsx";
 import QuestionTypeMatch from "../components/QuestionTypeMatch.jsx";
 import QuestionTypeFill from "../components/QuestionTypeFill.jsx";
+import QuestionTypeRearrange from "../components/QuestionTypeRearrange.jsx";
 import Congratulation from "../components/Congratulation.jsx";
 const Lesson = ({
   courseId,
@@ -15,6 +16,7 @@ const Lesson = ({
   setIsLesson,
   lessons,
   currentLesson,
+  setCurrentLesson
 }) => {
   const {
     profile,
@@ -24,7 +26,7 @@ const Lesson = ({
     setFetchLessonsOfSummaryLesson,
   } = useContext(UserInfo);
 
-  const [indexQuestion, setIndexQuestion] = useState(9);
+  const [indexQuestion, setIndexQuestion] = useState(0);
   const [indexLesson, setIndexLesson] = useState(currentLesson || 1);
   const [questions, setQuestions] = useState(
     lessons[indexLesson - 1] && lessons[indexLesson - 1]?.questions,
@@ -41,6 +43,18 @@ const Lesson = ({
       setIsLesson(false);
     }
   }, [lessons]);
+  useEffect(() => {
+    const fetchQuestions = async() => {
+      try {
+        const result = await instance.get(`lessons/${lessons[indexLesson - 1]._id}`)
+        setQuestions(result?.data?.data?.lesson?.questions) 
+      } catch (error) {
+        return error
+      }
+    }
+    fetchQuestions()
+    setLessonId(lessons[indexLesson - 1] && lessons[indexLesson - 1]._id);
+  }, [indexLesson, currentLesson]);
   const handleNextQuestion = async () => {
     if (countRequest === 1) return;
     setCountRequest(1);
@@ -68,6 +82,7 @@ const Lesson = ({
           turns: 5,
           dayStreak: Math.random()
         })
+          setCurrentLesson(indexLesson + 1)
           setIsLesson(false);
           setFetchProfile({ status: "-1 heart", numb: Math.random() });
           setFetchCourseOfLearningProcess({
@@ -77,18 +92,16 @@ const Lesson = ({
         } catch (error) {}
         return
       }
-      await instance
+      try {
+        await instance
         .patch("users/update_asset", {
           experiences: +lessons[indexLesson - 1].experiences,
           gems: +lessons[indexLesson - 1].gems,
           turns: 5,
           dayStreak: Math.random()
         })
-        .then(() => {
-          setFetchProfile({ status: "-1 heart", numb: Math.random() });
-        })
-        .catch();
-      await instance
+        setFetchProfile({ status: "-1 heart", numb: Math.random() });
+        await instance
         .patch("learning_process/update_milestone", {
           courseId,
           sectionId,
@@ -96,32 +109,22 @@ const Lesson = ({
           currentLesson,
           totalLessonDone: currentLesson,
         })
-        .then(() => {
           setIsCongratulation(true);
+          setCurrentLesson(indexLesson + 1)
           setFetchCourseOfLearningProcess({
             type: "update current lesson",
             numb: Math.random(),
           });
           setCountRequest(0);
-          return;
-        })
-        .catch((err) => {
-          setCountRequest(0);
-          return;
-        });
-      return;
+      } catch (error) {
+        setCountRequest(0);
+      }
     }
     setCountRequest(0);
   };
   const handleBackToMilestonePage = () => {
     setIsLesson(false);
   };
-  useEffect(() => {
-    setQuestions(
-      lessons[indexLesson - 1] && lessons[indexLesson - 1].questions,
-    );
-    setLessonId(lessons[indexLesson - 1] && lessons[indexLesson - 1]._id);
-  }, [indexLesson]);
   useEffect(() => {
     colorDiv.current.style.width =
       (indexQuestion / questions?.length) * 100 + "%";
@@ -170,20 +173,19 @@ const Lesson = ({
               className="fa-solid fa-arrow-left cursor-pointer text-2xl md:text-3xl"
             ></i>
           </li>
-          <li className="mx-3 h-4 w-full rounded-md bg-[#eeeeee]">
+          <li className="mx-3 h-4 w-full rounded-md bg-[#e5e5e5]">
             <div
               ref={colorDiv}
-              className="h-4 w-[0%] rounded-md bg-red-600 transition ease-linear"
+              className="ml-[2px] mt-[2px] h-[0.8rem] w-[0%] rounded-md bg-red-600 transition ease-linear"
             ></div>
           </li>
           <li className="flex items-center justify-center">
             <img src="/images/logo/heart.webp" className="h-7 w-7" />
-            <p className="ml-1 flex items-center justify-center font-mono text-2xl font-medium text-red-600 md:text-3xl">
+            <p className="ml-1 flex items-center justify-center font-noto text-2xl font-medium text-red-600 md:text-3xl lazyload">
               {profile?.hearts ? profile?.hearts : 0}
             </p>
           </li>
         </ul>
-        {/* <i onClick={handleBackToMilestonePage} className="fa-solid fa-arrow-left absolute left-2 top-[5rem] cursor-pointer text-2xl md:left-[3rem] md:top-[6rem] md:text-3xl lg:left-[5rem]"></i> */}
         {questions && questions[indexQuestion]?.question?.type === "choose" ? (
           <QuestionTypeChoose
             question={questions[indexQuestion]?.question}
@@ -203,9 +205,12 @@ const Lesson = ({
             lessonId={lessonId}
             handleNextQuestion={handleNextQuestion}
           />
-        ) : (
-          ""
-        )}
+        ) : questions && questions[indexQuestion]?.question?.type === "rearrange" ? (
+          <QuestionTypeRearrange
+            question={questions[indexQuestion]?.question}
+            lessonId={lessonId}
+            handleNextQuestion={handleNextQuestion}
+          />) : ''}
       </div>
     </>
   );

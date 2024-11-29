@@ -51,7 +51,7 @@ const ChangeProfile = ({ setIsEditProfile }) => {
     }
   }
   return (
-    <div className="fixed left-1/3 top-1/3 z-20 mx-auto mt-10 w-[95%] -translate-x-1/3 -translate-y-1/2 transform rounded-lg bg-white p-6 font-mono shadow-md sm:left-1/2 sm:w-96 sm:-translate-x-1/2 md:left-[66%] xl:left-[57%]">
+    <div className="fixed left-1/3 top-1/3 z-20 mx-auto mt-10 w-[95%] -translate-x-1/3 -translate-y-1/2 transform rounded-lg bg-white p-6 font-noto shadow-md sm:left-1/2 sm:w-96 sm:-translate-x-1/2 md:left-[66%] xl:left-[57%]">
       <i
         className="fa-solid fa-xmark-large absolute right-3 top-3 cursor-pointer"
         onClick={() => setIsEditProfile(false)}
@@ -109,7 +109,7 @@ const ChangeProfile = ({ setIsEditProfile }) => {
         >
           {isSending ? 'Đang lưu...' : 'Lưu thông tin'}
         </button>
-        <p className="text-center font-mono text-lg text-red-500">{message}</p>
+        <p className="text-center font-noto text-lg text-red-500">{message}</p>
       </form>
     </div>
   );

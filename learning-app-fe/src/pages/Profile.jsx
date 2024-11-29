@@ -5,7 +5,7 @@ import { UserInfo } from "../stores/user.store";
 import MainLayout from "../layouts/MainLayout.jsx";
 import ChangePassword from "../components/ChangePassword.jsx";
 import ChangeProfile from "../components/ChangeProfile.jsx";
-const Profile = () => {
+  const Profile = () => {
   const { profile, setFetchProfile } = useContext(UserInfo);
   const [isEditProfile, setIsEditProfile] = useState(false);
   const [changeAvatar, setChangeAvatar] = useState(false)
@@ -73,7 +73,7 @@ const Profile = () => {
                     : "/images/logo/person-default.png"
               }
               alt="User Avatar"
-              className="h-96 md:h-[60vh] w-full sm:w-3/4 lg:w-[60%] xl:w-[45%] rounded-lg object-cover"
+              className="h-96 md:h-[60vh] w-full sm:w-3/4 lg:w-[60%] xl:w-[45%] rounded-lg object-cover lazyload"
             />
             {isEditing ? (
               <ul className="flex absolute bottom-1 right-4 ">
@@ -81,7 +81,7 @@ const Profile = () => {
                 onClick={handleCancelUpdateAvatar}
                 className="flex transform rounded-full bg-gradient-to-r from-pink-400 to-blue-600 px-4 py-2 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 active:scale-95"
               >
-                <span className="font-mono text-sm">Dừng thay đổi</span>
+                <span className="font-noto text-sm">Dừng thay đổi</span>
               </button>
               <button
                 onClick={handleSaveAvatar}
@@ -102,7 +102,7 @@ const Profile = () => {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
-                  <span className="font-mono text-sm">{statusChangAvatar}</span>
+                  <span className="font-noto text-sm">{statusChangAvatar}</span>
                 </span>
               </button>
               </ul>
@@ -126,7 +126,7 @@ const Profile = () => {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
-                  <span className="font-mono text-sm">Chỉnh sửa ảnh</span>
+                  <span className="font-noto text-sm">Chỉnh sửa ảnh</span>
                 </span>
               </button>
             )}
@@ -145,13 +145,13 @@ const Profile = () => {
           )}
           <p className="w-full text-center text-2xl text-red-600 px-2 mt-1 text-wrap">{message}</p>
           <div className="ml-3 mt-3 md:ml-0 md:text-center">
-            <h2 className="font-mono text-xl lg:text-2xl">
+            <h2 className="font-noto text-xl lg:text-2xl">
               Tên: {profile.fullName}
             </h2>
-            <p className="mt-2 font-mono text-xl lg:text-2xl">
+            <p className="mt-2 font-noto text-xl lg:text-2xl">
               Email: {profile.email}
             </p>
-            <p className="mt-2 font-mono text-xl lg:text-2xl">
+            <p className="mt-2 font-noto text-xl lg:text-2xl">
               Giới tính: {profile.sex === 0 ? "Nữ" : "Nam"}
             </p>
             {/* <div className="mx-auto mt-4 w-full">
@@ -162,7 +162,7 @@ const Profile = () => {
                     alt="user exps"
                     className="h-8 w-9 "
                   />
-                  <p className="ml-2 flex items-center justify-center font-mono text-2xl font-medium text-slate-700 md:text-3xl">
+                  <p className="ml-2 flex items-center justify-center font-noto text-2xl font-medium text-slate-700 md:text-3xl">
                     {profile.experiences}
                   </p>
                 </li>
@@ -172,7 +172,7 @@ const Profile = () => {
                     alt="user gems"
                     className="h-8 w-9 "
                   />
-                  <p className="ml-2 flex items-center justify-center font-mono text-2xl font-medium text-yellow-300 md:text-3xl">
+                  <p className="ml-2 flex items-center justify-center font-noto text-2xl font-medium text-yellow-300 md:text-3xl">
                     {profile.gems}
                   </p>
                 </li>
@@ -182,7 +182,7 @@ const Profile = () => {
                     alt="user day streak"
                     className="h-8 w-9 "
                   />
-                  <p className="ml-2 flex items-center justify-center font-mono text-2xl font-medium md:text-3xl">
+                  <p className="ml-2 flex items-center justify-center font-noto text-2xl font-medium md:text-3xl">
                     {profile.dayStreak}
                   </p>
                 </li>
@@ -192,10 +192,10 @@ const Profile = () => {
 
           {/* Edit button (future feature) */}
           <div className="mt-6 mx-2 flex flex-col justify-center md:flex-row">
-            <div onClick={() => setIsEditProfile(!isEditProfile)} className="transform cursor-pointer rounded-lg bg-gradient-to-r from-pink-400 to-blue-600 px-6 py-3 font-mono text-lg text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95">
+            <div onClick={() => setIsEditProfile(!isEditProfile)} className="transform cursor-pointer rounded-lg bg-gradient-to-r from-pink-400 to-blue-600 px-6 py-3 font-noto text-lg text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95">
               Chỉnh sửa thông tin
             </div>
-            <div onClick={() => setIsEditPassword(!isEditPassword)} className="mt-2 transform cursor-pointer rounded-lg bg-gradient-to-r from-pink-400 to-blue-600 px-6 py-3 font-mono text-lg text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95 md:ml-2 md:mt-0">
+            <div onClick={() => setIsEditPassword(!isEditPassword)} className="mt-2 transform cursor-pointer rounded-lg bg-gradient-to-r from-pink-400 to-blue-600 px-6 py-3 font-noto text-lg text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95 md:ml-2 md:mt-0">
               Thay đổi mật khẩu
             </div>
           </div>

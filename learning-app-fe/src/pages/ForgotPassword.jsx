@@ -39,8 +39,8 @@ const ForgotPassword = () => {
     </div>
         <div className="flex h-auto w-[35rem] flex-col bg-white p-6">
           <div className="mb-5 flex w-full">
-            <img src="/images/pngtree.png" className="w-[8rem]" />
-            <p className="ml-3 flex items-center justify-center text-3xl font-bold font-mono">
+            <img src="/images/pngtree.png" className="w-[8rem] lazyload" />
+            <p className="ml-3 flex items-center justify-center text-3xl font-bold font-noto">
               Chào mừng bạn tới Duylingo
             </p>
           </div>
@@ -58,7 +58,7 @@ const ForgotPassword = () => {
               type="text"
               placeholder="Nhập email của bạn để lấy lại mật khẩu"
               name="email"
-              className="mb-[1rem] w-full border border-inherit p-4 pl-3 outline-none font-mono"
+              className="mb-[1rem] w-full border border-inherit p-4 pl-3 outline-none font-noto"
             />
             <br />
             {errors.email && (
@@ -67,7 +67,7 @@ const ForgotPassword = () => {
               </p>
             )}
             {message && (
-              <p className="mb-2 w-full text-left text-xl text-red-500 font-mono">
+              <p className="mb-2 w-full text-left text-xl text-red-500 font-noto">
                 {message}
               </p>
             )}
