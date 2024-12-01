@@ -1,4 +1,4 @@
-import { useRef, useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import instance from "../utils/axiosRequest.js";
 import MainLayout from "../layouts/MainLayout.jsx";
@@ -10,8 +10,6 @@ const Alphabet = () => {
   const { courseOfLearningProcess } = useContext(UserInfo);
   const [dataAlphabet, setDataAlphabet] = useState([]);
   const navigate = useNavigate()
-  const [audioUrl, setAudioUrl] = useState();
-  const audioRef = useRef();
   useEffect(() => {
     courseOfLearningProcess.length !== 0 &&
     courseOfLearningProcess[0].courseId.typeWritingSystem === "glyphs" ? navigate('/character') : navigate('/alphabet')
@@ -25,17 +23,18 @@ const Alphabet = () => {
         const result = await instance.get(
           `glyphs_alphabet?courseId=${courseId}`,
         );
-        setDataAlphabet(result.data.data.alphabet);
+        setDataAlphabet(result.data.data.glyphsAndAlphabet);
       } catch (error) {
         return error;
       }
     };
     fetch();
   }, [courseOfLearningProcess]);
-  // const url = "https://www.dropbox.com/scl/fi/9lvgdljyyqs7k9broiayw/b-mp3.m4a?rlkey=yndj8d52nks2jcr8szmvnntvt&st=59mhofya&dl=1"
+  // const url = "https://r.yellowbridge.com/sounds/py-cbr/bu4.mp3"
   const handleListenAudio = (audio) => {
     audio.play();
   };
+  
   return (
     <MainLayout>
       <div className="static mt-[5rem] md:absolute md:left-[5.5rem] md:w-[49vw] lg:left-[17rem] lg:w-[39vw] xl:w-[49vw]">

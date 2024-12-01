@@ -11,14 +11,14 @@ const NavBar = () => {
   };
   return (
     <>
-      <ul className="fixed bottom-0 z-20 flex h-[3.8rem] w-full justify-evenly border-t-2 border-[#e5e5e5] bg-[#f3f8f9] py-[3px] text-[#777777] md:fixed md:top-0 md:h-screen md:w-auto md:flex-col md:justify-start md:gap-2 md:border-r-[3px] md:border-t-0 md:border-r-[#eeeeee] md:bg-white md:pt-[4rem] lg:w-[17rem] lg:pt-[1rem] xl:px-6">
+      <ul className="fixed bottom-0 z-20 flex h-[3.8rem] w-full justify-evenly border-t-2 border-[#e5e5e5] bg-[#f3f8f9] py-[3px] text-[#777777] md:fixed md:top-0 md:h-screen md:w-auto md:flex-col md:justify-start md:gap-2 md:border-r-[3px] md:border-t-0 md:border-r-[#eeeeee] md:bg-white md:pt-[4rem] lg:w-[17rem] lg:pt-[1rem] lg:px-6">
         <Link
           to="/home"
           title="Trang chủ"
           className="hidden items-center justify-center md:flex"
         >
-          <img src="/images/logo/cat-black.png" className="mr-1 w-10 lazyload" />
-          <h2 className="hidden cursor-pointer justify-center py-2 font-noto text-3xl font-medium text-red-400 lg:flex">
+          <img src="/images/logo/cat-black.png" className="mr-1 w-12 lazyload" />
+          <h2 className="hidden cursor-pointer justify-center py-2 font-noto text-3xl font-bold text-red-400 lg:flex">
             Duylingo
           </h2>
         </Link>
@@ -147,7 +147,7 @@ const NavBar = () => {
             {profile.avatar ? (
               <img
                 src={profile.avatar}
-                className="w-8 rounded-[50%] object-cover md:w-10 lazyload"
+                className="w-12 rounded-[50%] border-[1px] border-blue-400 object-cover lazyload"
               />
             ) : (
               <img src="/images/logo/person-default.png" className="w-10 lazyload" />

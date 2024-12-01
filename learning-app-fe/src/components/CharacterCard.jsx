@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 const CharacterCard = ({ character, example, audioUrl, handleListenAudio }) => {
   const audioRef = useRef()
   const handlegetAudioRef = () => {

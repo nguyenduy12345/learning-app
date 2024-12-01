@@ -28,7 +28,17 @@ const QuestionTypeFill = ({
     crrWords.splice(indexWord, 1);
     setWords(crrWords);
     setIndexWord(false);
-    setListWordDrop([...listWordDrop, { index, word: words[indexWord] }]);
+    const findWord = listWordDrop.findIndex(item => +item.index === +index)
+    if(findWord > -1){
+      const crrWords = [...words];
+      crrWords.splice(indexWord, 1);
+      crrWords.splice(indexWord, 0 , listWordDrop[findWord].word)
+      setWords(crrWords)
+      listWordDrop[findWord].word = words[indexWord]
+      setListWordDrop([...listWordDrop]);
+    }else{
+      setListWordDrop([...listWordDrop, { index, word: words[indexWord] }]);
+    }
   };
   const handleDragStartWord = (word, index) => {
     setIndexWord(index);

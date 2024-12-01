@@ -289,7 +289,7 @@ const Milestone = () => {
           <div className="absolute top-[5rem] m-[0.5rem] w-full font-noto scrollbar-none md:left-[5.5rem] md:w-[49vw] lg:left-[17rem] lg:w-[39vw] xl:w-[50vw] 2xl:w-[52vw]">
             <div className="fixed top-[3.8rem] z-10 h-[5rem] w-full bg-white"></div>
             <div
-              className={`fixed top-[4.7rem] z-10 flex h-[5.5rem] lg:h-[6.5rem] w-[97%] gap-[5px] rounded-2xl border-b-4 border-b-[#546b44] md:border-none bg-[#58cc02] pl-4 md:top-[5rem] md:w-[47vw] lg:w-[38vw] xl:w-[46vw] 2xl:w-[50 lazyloadvw]`}
+              className={`fixed top-[4.7rem] z-10 flex h-[5.5rem] lg:h-[6.5rem] w-[96.5%] gap-[5px] rounded-2xl border-b-4 border-b-[#546b44] md:border-none bg-[#58cc02] pl-4 md:top-[6rem] md:left-[6rem] md:w-[46vw] lg:left-[18rem] lg:w-[38vw] xl:w-[46vw] 2xl:w-[49.5vw]`}
             >
               <div className="flex-grow flex flex-col justify-center ml-[0.4rem] sm:ml-[1.5rem]">
                 <div className="flex text-white">
