@@ -43,7 +43,7 @@ const UserInfoProvide = ({ children }) => {
     getListLesson()
   }, [fetchLessonsOfSummaryLesson])
   return (
-    <UserInfo.Provider value={{ profile, setFetchProfile, courseOfLearningProcess, setFetchCourseOfLearningProcess, lessonsOfSummaryLesson, setFetchLessonsOfSummaryLesson}}>
+    <UserInfo.Provider value={{ profile, setProfile, setFetchProfile, courseOfLearningProcess, setFetchCourseOfLearningProcess, lessonsOfSummaryLesson, setFetchLessonsOfSummaryLesson}}>
       {children}
     </UserInfo.Provider>
   );

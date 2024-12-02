@@ -5,7 +5,7 @@ import { UserInfo } from "../stores/user.store.jsx";
 import instance from "../utils/axiosRequest.js";
 const QuestionTypeMatch = ({ question, lessonId, handleNextQuestion }) => {
   const {
-    setFetchProfile,
+    setProfile,
     lessonsOfSummaryLesson,
     setFetchLessonsOfSummaryLesson,
   } = useContext(UserInfo);
@@ -88,7 +88,10 @@ const QuestionTypeMatch = ({ question, lessonId, handleNextQuestion }) => {
         await instance.patch("users/update_asset", {
           hearts: Math.random(),
         });
-        setFetchProfile({ status: "-1 heart", numb: Math.random() });
+        setProfile(prevProfile => ({
+          ...prevProfile,
+          hearts: prevProfile.hearts - 1,
+        }));
         const findIndexLesson = lessonsOfSummaryLesson.findIndex(
           (lesson) => lesson.lesson._id.toString() === lessonId,
         );
