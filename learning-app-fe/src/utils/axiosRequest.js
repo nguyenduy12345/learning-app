@@ -1,10 +1,11 @@
 import axios from "axios";
-// 
+import Cookies from "js-cookie"
 const instance = axios.create({
     baseURL: 'http://localhost:8080/api/v1/',
     headers: {'Accept-Language': 'vi-vn'}
 });
-const token = localStorage.getItem("Token") ? JSON.parse(localStorage.getItem("Token")) : null;
+
+const token = Cookies.get("token")
 instance.defaults.headers.common["Authorization"] = "Bearer " + token;
 const createAxiosResponseInterceptor = () => {
   const refreshtoken = JSON.parse(localStorage.getItem("REFRESH_TOKEN"));

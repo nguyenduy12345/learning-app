@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Cookies from "js-cookie"
 
 import instance from "../utils/axiosRequest.js";
 import { UserInfo } from "../stores/user.store.jsx";
@@ -8,11 +9,11 @@ import { UserInfo } from "../stores/user.store.jsx";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [messageLogin, setMessageLogin] = useState(false);
-  const { profile } = useContext(UserInfo)
-  const navigate = useNavigate()
+  const { profile } = useContext(UserInfo);
+  const navigate = useNavigate();
   useEffect(() => {
-    !!profile.fullName && navigate('/learning')
-  },[profile])
+    !!profile.fullName && navigate("/learning");
+  }, [profile]);
   const {
     register,
     handleSubmit,
@@ -23,17 +24,15 @@ const Login = () => {
     setFocus("email");
   }, [setFocus]);
   const onSubmit = async (data) => {
-    if(!data) return
+    if (!data) return;
     try {
-      await instance.post('login', data)
-      .then((result) => {  
-        setMessageLogin(result?.data?.message)
-        localStorage.setItem('Full_name', JSON.stringify(result?.data?.data?.fullName))
-        localStorage.setItem('Token', JSON.stringify(result?.data?.data?.accessToken))
-         lazyload
-      })   
+      await instance.post("login", data).then((result) => {
+        setMessageLogin(result?.data?.message);
+        Cookies.set("token", result?.data?.data?.accessToken, {expires: 30} )
+        result?.data ? window.location.href = "http://localhost:5173/learning " : ''
+      });
     } catch (error) {
-      setMessageLogin(error?.response?.data?.message)
+      setMessageLogin(error?.response?.data?.message);
     }
   };
   return (
@@ -41,8 +40,8 @@ const Login = () => {
       <div className="flex h-screen w-full items-center justify-center bg-gradient-to-r from-pink-400 to-blue-600">
         <div className="flex h-auto w-[35rem] flex-col bg-white p-6">
           <div className="mb-5 flex w-full">
-            <img src="/images/pngtree.png" className="w-[8rem] lazyload" />
-            <p className="ml-3 flex items-center justify-center text-3xl font-bold font-noto">
+            <img src="/images/pngtree.png" className="lazyload w-[8rem]" />
+            <p className="ml-3 flex items-center justify-center font-noto text-3xl font-bold">
               Chào mừng bạn tới Duylingo
             </p>
           </div>
@@ -60,29 +59,27 @@ const Login = () => {
               type="text"
               placeholder="Email"
               name="email"
-              className="mb-[1rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
+              className="mb-[1rem] w-full border border-inherit p-2 pl-3 font-noto outline-none"
             />
             <br />
             {errors.email && (
-              <p className="mb-2 text-red-500">
-                {errors.email.message}
-              </p>
+              <p className="mb-2 text-red-500">{errors.email.message}</p>
             )}
             <div className="relative">
               <input
                 {...register("password", {
                   required: "Nhập mật khẩu của bạn",
                   validate: (value) => {
-                    if(!value.match(/^[A-Za-z0-9]+$/)){
-                        return 'Vui lòng nhập mật khẩu của bạn'
+                    if (!value.match(/^[A-Za-z0-9]+$/)) {
+                      return "Vui lòng nhập mật khẩu của bạn";
                     }
-                    return true
+                    return true;
                   },
                 })}
                 type={showPassword ? "text" : "password"}
                 placeholder="Mật khẩu"
                 name="password"
-                className="mb-[1rem] w-full border border-inherit p-2 pl-3 outline-none font-noto"
+                className="mb-[1rem] w-full border border-inherit p-2 pl-3 font-noto outline-none"
               />
               {showPassword ? (
                 <i
@@ -97,41 +94,51 @@ const Login = () => {
               )}
               <br />
               {errors.password && (
-                <p className="mb-2 text-red-500">
-                  {errors.password.message}
-                </p>
+                <p className="mb-2 text-red-500">{errors.password.message}</p>
               )}
             </div>
             <button className="h-16 w-full bg-gradient-to-r from-pink-400 to-blue-600 p-2 text-2xl font-bold text-white hover:text-black">
-              {isSubmitting ? 'Đang gửi' : 'Đăng Nhập'}
+              {isSubmitting ? "Đang gửi" : "Đăng Nhập"}
             </button>
             {messageLogin && (
-              <p className="mt-1 w-full text-center text-xl text-red-500 font-noto">
+              <p className="mt-1 w-full text-center font-noto text-xl text-red-500">
                 {messageLogin}
               </p>
             )}
           </form>
-          <Link to="/forgot_password" className="mt-[0.3rem] w-full cursor-pointer text-sky-500 font-noto">
+          <Link
+            to="/forgot_password"
+            className="mt-[0.3rem] w-full cursor-pointer font-noto text-sky-500"
+          >
             Quên mật khẩu?
           </Link>
           <p className="mt-2 font-noto">
             Bạn chưa có đã có tài khoản?{" "}
-            <Link to="/register" className="text-[1.1rem] font-bold font-noto text-blue-700">
+            <Link
+              to="/register"
+              className="font-noto text-[1.1rem] font-bold text-blue-700"
+            >
               Đăng Ký
             </Link>
           </p>
           <div className="mt-4 w-full md:flex md:flex-row">
-            <div className="flex cursor-pointer justify-center bg-[#dfe8e7] hover:text-white p-3 font-medium font-noto md:mr-1 md:w-1/2">
-              <img src="images/logo/googlelogo.png" className="mr-2 h-6 w-6 lazyload" />
+            <div className="flex cursor-pointer justify-center bg-[#dfe8e7] p-3 font-noto font-medium hover:text-white md:mr-1 md:w-1/2">
+              <img
+                src="images/logo/googlelogo.png"
+                className="lazyload mr-2 h-6 w-6"
+              />
               Đăng nhập bằng Google
             </div>
-            <div className="mt-1 flex cursor-pointer justify-center bg-[#8b8fde] hover:text-black p-3 font-medium text-white md:mt-0 md:w-1/2">
-              <img src="images/logo/facebook.webp" className="mr-2 h-6 w-6 font-noto lazyload" />
+            <div className="mt-1 flex cursor-pointer justify-center bg-[#8b8fde] p-3 font-medium text-white hover:text-black md:mt-0 md:w-1/2">
+              <img
+                src="images/logo/facebook.webp"
+                className="lazyload mr-2 h-6 w-6 font-noto"
+              />
               Đăng nhập bằng Facebook
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     </>
   );
 };

@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-
+import Cookies from "js-cookie"
 import { UserInfo } from "../stores/user.store.jsx";
 const NavBar = () => {
   const { profile, courseOfLearningProcess } = useContext(UserInfo);
   const [smallNav, setSmallNav] = useState(false);
   const handleUserLogOut = () => {
-    localStorage.removeItem("Token");
+    Cookies.remove("token")
     window.location.href = "http://localhost:5173/login";
   };
   return (
@@ -32,7 +32,7 @@ const NavBar = () => {
           to="/learning"
         >
           <li className="flex h-[2.5rem] w-auto cursor-pointer items-center px-[2px] md:mb-1 md:h-[3.5rem] md:rounded-lg md:px-3 md:py-1 md:hover:bg-[#ddf4ff] lg:w-full">
-            <img src="/images/logo/home.png" className="w-10 lazyload" />
+            <img src="/images/logo/home-nav.svg" className="w-10 lazyload" />
             <p className="ml-5 hidden font-noto text-lg font-medium lg:block">
               Học tập
             </p>
@@ -107,7 +107,7 @@ const NavBar = () => {
         >
           <li className="flex h-[2.5rem] cursor-pointer items-center px-[2px] md:mb-1 md:flex md:h-[3.5rem] md:rounded-lg md:px-3 md:py-1 md:hover:bg-[#ddf4ff] lg:w-full">
             <img
-              src="/images/logo/pngtree-task-img.png"
+              src="/images/logo/misson-nav.svg"
               className="w-8 md:w-10"
             />
             <p className="ml-5 hidden font-noto text-lg font-medium lg:block lazyload">
@@ -126,8 +126,8 @@ const NavBar = () => {
         >
           <li className="flex h-[2.5rem] cursor-pointer items-center px-[2px] md:mb-1 md:h-[3.5rem] md:rounded-lg md:px-3 md:py-1 md:hover:bg-[#ddf4ff] lg:w-full">
             <img
-              src="/images/logo/rank-ranking-img.webp"
-              className="w-8 md:w-10  lazyload"
+              src="/images/logo/rank-nav.svg"
+              className="w-8 md:w-10 lazyload"
             />
             <p className="ml-5 hidden font-noto text-lg font-medium lg:block">
               Xếp hạng

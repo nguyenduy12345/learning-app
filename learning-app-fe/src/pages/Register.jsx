@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Cookies from "js-cookie"
 
 import instance from "../utils/axiosRequest.js";
 import { UserInfo } from "../stores/user.store.jsx";
@@ -40,8 +41,7 @@ const Register = () => {
         password
       })
       .then((result) => {
-        localStorage.setItem('Full_name', JSON.stringify(fullName))
-        localStorage.setItem('Token', JSON.stringify(result?.data?.data?.accessToken))
+        Cookies.set("token", result?.data?.data?.accessToken, {expires: 30} )
         result?.data ? window.location.href = "http://localhost:5173/learning " : ''
       })      
     } catch (error) {

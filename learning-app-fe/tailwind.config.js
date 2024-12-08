@@ -7,10 +7,13 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'book-img' : "url(/images/home-img/1426929.webp)"
+        'book-img' : "url(/images/home/1426929.webp)",
+        'moon': "url(/images/home/canh-anh-trang.gif)"
       },
       fontFamily: {
         noto: ['Noto Sans', 'sans-serif'],
+        quicksand: ['Quicksand', 'sans-serif'],
+        lato : [ 'Lato', 'sans-serif']
       }
     },
   },

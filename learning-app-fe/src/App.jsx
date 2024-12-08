@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import 'lazysizes';
 
 import Home from './pages/Home.jsx'
@@ -28,8 +29,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/forgot_password' element={<ForgotPassword />} />
         <Route path='/courses' element={<Courses />} />
-        <Route path='/learning' element={<Learning />} >
-        </Route>
+        <Route path='/learning' element={<Learning />} />
         <Route path='/milestones' element={<Milestone />} />
         <Route path='/rank' element={<Rank />} />
         <Route path='/missons' element={<Misson />} />

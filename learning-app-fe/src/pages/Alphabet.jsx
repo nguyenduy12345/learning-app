@@ -53,9 +53,9 @@ const Alphabet = () => {
         <div className="w-full">
           <div className="px-6">
             <h2 className="relative mb-4 text-center text-xl font-bold">
-              <span className="absolute left-0 top-1/2 w-[30vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+              <span className="absolute left-0 top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
               Bảng Chữ Cái
-              <span className="absolute right-0 top-1/2 w-[30vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+              <span className="absolute right-0 top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
             </h2>
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-3 md:grid-cols-4 xl:grid-cols-5">
               {dataAlphabet?.letters?.map(({ letter, example, audioUrl }) => (
@@ -69,16 +69,16 @@ const Alphabet = () => {
               ))}
             </div>
             <h2 className="relative mb-4 mt-[1rem] text-center text-xl font-bold">
-              <span className="absolute left-0 top-1/2 w-[30vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+              <span className="absolute left-0 top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
               Phát âm
-              <span className="absolute right-0 top-1/2 w-[30vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+              <span className="absolute right-0 top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
             </h2>
             <div className="">
               <div>
                 <h2 className="relative mb-4 mt-[1rem] text-center text-xl font-bold">
-                  <span className="absolute left-[10%] top-1/2 w-[25vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+                  <span className="absolute left-[10%] top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
                   Vowels
-                  <span className="absolute right-[10%] top-1/2 w-[25vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+                  <span className="absolute right-[10%] top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
                 </h2>
                 <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
                   {dataAlphabet?.phonetic?.vowels?.map(
@@ -96,9 +96,9 @@ const Alphabet = () => {
               </div>
               <div>
                 <h2 className="relative mb-4 mt-[2rem] text-center text-xl font-bold">
-                  <span className="absolute left-[10%] top-1/2 w-[25vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+                  <span className="absolute left-[10%] top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
                   Consonants
-                  <span className="absolute right-[10%] top-1/2 w-[25vw] -translate-y-1/2 transform border-t border-[#5a5757] md:w-[10vw]"></span>
+                  <span className="absolute right-[10%] top-1/2 hidden -translate-y-1/2 transform border-t border-[#5a5757] sm:block sm:w-[20vw] md:w-[3rem] xl:w-[9rem]"></span>
                 </h2>
                 <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
                   {dataAlphabet?.phonetic?.consonants?.map(

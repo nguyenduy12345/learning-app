@@ -4,7 +4,7 @@ import { UserInfo } from "../stores/user.store";
 const SideBar = () => {
   const { profile } = useContext(UserInfo)
   return (
-    <div className="fixed z-10 top-[7rem] text-[#777777] right-[1.5rem] hidden h-screen flex-col gap-4 md:flex md:w-[35vw] lg:w-[30vw] xl:w-[28vw] font-noto">
+    <div className="fixed z-10 top-[7rem] text-[#777777] md:left-[62.5vw] lg:left-[67.5vw] xl:left-[70vw] hidden h-screen flex-col gap-4 md:flex md:w-[35vw] lg:w-[30vw] xl:w-[28vw] font-noto">
       <div className="h-[9rem] w-full rounded-2xl bg-white py-6 border-[2px] border-[#e5e5e5]">
         <h4 className="ml-4 text-xl font-medium text-black font-noto mb-4">Số ngày hoạt động</h4>
         <div className="flex items-center gap-3 px-4">
@@ -34,7 +34,7 @@ const SideBar = () => {
               </li>
             </ul>
             <div className="ml-4 flex items-end">
-              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9 lazyload" />
+              <img src="/images/logo/misson-gift.svg" className="h-9 w-9 lazyload" />
             </div>
           </li> 
           <li className="flex w-full mt-2 px-4">
@@ -46,7 +46,7 @@ const SideBar = () => {
               </li>
             </ul>
             <div className="ml-4 flex items-end">
-              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9 lazyload" />
+              <img src="/images/logo/misson-gift.svg" className="h-9 w-9 lazyload" />
             </div>
           </li>
         </ul>

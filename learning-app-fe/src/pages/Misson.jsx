@@ -49,7 +49,7 @@ const Misson = () => {
               </li>
             </ul>
             <div className="ml-4 flex items-center justify-center">
-              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9 lazyload" />
+              <img src="/images/logo/misson-gift.svg" className="h-9 w-9 lazyload" />
             </div>
           </li>
           <li className="flex w-full h-[7rem] border-[1px] border-[#e5e5e5] p-4 rounded-xl">
@@ -61,7 +61,7 @@ const Misson = () => {
               </li>
             </ul>
             <div className="ml-4 flex items-center justify-center">
-              <img src="/images/logo/treasure-chest.webp" className="h-9 w-9 lazyload" />
+              <img src="/images/logo/misson-gift.svg" className="h-9 w-9 lazyload" />
             </div>
           </li>
         </ul>
