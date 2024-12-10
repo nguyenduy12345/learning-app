@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
 import 'lazysizes';
 
 import Home from './pages/Home.jsx'
@@ -15,31 +14,35 @@ import Character from './pages/Character.jsx'
 import Milestone from './pages/Milestone.jsx'
 import Lesson from './pages/Lesson.jsx'
 import ForgotPassword from './pages/ForgotPassword.jsx'
+import PrivateRoute from './components/PrivateRoute.jsx';
 
 import UserInfoProvide from './stores/user.store.jsx'
 function App() {
   return (
     <>
     <Router>
-    <UserInfoProvide >
+      <UserInfoProvide >
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
+        
         <Route path='/register' element= {<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/forgot_password' element={<ForgotPassword />} />
-        <Route path='/courses' element={<Courses />} />
-        <Route path='/learning' element={<Learning />} />
-        <Route path='/milestones' element={<Milestone />} />
-        <Route path='/rank' element={<Rank />} />
-        <Route path='/missons' element={<Misson />} />
-        <Route path='/alphabet' element={<Alphabet />} />
-        <Route path='/character' element={<Character />} />
-        <Route path='/lesson' element={<Lesson />} />
-        <Route path='/profile' element={<Profile />} />
+
+        <Route path="/courses" element={<PrivateRoute element={<Courses />} />} />
+        <Route path="/learning" element={<PrivateRoute element={<Learning />} />} />
+        <Route path="/milestones" element={<PrivateRoute element={<Milestone />} />} />
+        <Route path="/rank" element={<PrivateRoute element={<Rank />} />} />
+        <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+        <Route path="/missons" element={<PrivateRoute element={<Misson />} />} />
+        <Route path="/alphabet" element={<PrivateRoute element={<Alphabet />} />} />
+        <Route path="/character" element={<PrivateRoute element={<Character />} />} />
+        <Route path="/lesson" element={<PrivateRoute element={<Lesson />} />} />
+          
         <Route path='*' />
       </Routes>
-    </UserInfoProvide>
+      </UserInfoProvide>
     </Router>
     </>
   )

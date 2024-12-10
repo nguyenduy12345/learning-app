@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useCallback, useState } from "react";
+import { useContext, useEffect, useRef, useCallback, useState, memo } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import {
   Label,
@@ -19,10 +19,20 @@ const Header = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     setSelected(
-      courseOfLearningProcess ? courseOfLearningProcess[0]?.courseId : null,
+      courseOfLearningProcess ? courseOfLearningProcess[0]?.courseId : false,
     );
   }, [courseOfLearningProcess]);
-  const handleSelectCourse = async (course, id) => {
+  // useEffect(() =>{
+  //   const getListCourse = async() =>{
+  //       await instance.get('/learning_process')
+  //       .then((res) => {
+  //         res?.data?.data?.courses?.length === 0 && navigate('/courses')
+  //       })
+  //       .catch(err => err)
+  //   }
+  //   getListCourse()
+  // }, [courseOfLearningProcess])
+  const handleSelectCourse = useCallback( async (course, id) => {
     if(countRequest === 1) return
     setCountRequest(1)
     setSelected(course)
@@ -36,12 +46,12 @@ const Header = () => {
       .catch(err => {
         setCountRequest(0)
       })
-  };
+  },[courseOfLearningProcess]);
   return (
     <div className="font-noto z-30 fixed w-full top-0 md:w-[90vw] md:left-[5.7rem] lg:left-[17rem] justify-center bg-white py-3 border-b-[1px] border-[#e5e5e5]">
       <ul className="flex flex-wrap gap-2 w-full justify-evenly text-end md:w-[80%] md:justify-evenly">
         <li className="flex items-center justify-center">
-          <Listbox value={selected} onChange={setSelected}>
+          <Listbox value={selected || []} onChange={setSelected}>
             <div className="relative mt-2">
               <ListboxButton className="relative w-auto sm:w-[10rem] cursor-default rounded-md bg-white p-1 text-left text-[12px] text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 <span className="flex items-center">
@@ -56,7 +66,7 @@ const Header = () => {
                         {selected?.name ? "Tiếng " + selected?.name : ""}
                       </span>
                     </>
-                  ) :(
+                  ) : (
                     <Link to="/courses" className="ml-1">
                       Chọn khóa học
                     </Link>
@@ -69,7 +79,6 @@ const Header = () => {
                   />
                 </span>
               </ListboxButton>
-
               <ListboxOptions
                 transition
                 className="absolute z-10 mt-1 max-h-56 w-auto overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"

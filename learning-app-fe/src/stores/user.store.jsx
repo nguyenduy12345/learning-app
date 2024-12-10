@@ -1,24 +1,22 @@
 import { createContext, useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom"
 import instance from "../utils/axiosRequest.js";
 
 export const UserInfo = createContext({});
 
 const UserInfoProvide = ({ children }) => {
-  const [profile, setProfile] = useState([])
+  const [profile, setProfile] = useState()
   const [fetchProfile, setFetchProfile] = useState([]);
   const [courseOfLearningProcess, setCourseOfLearningProcess] = useState([])
   const [fetchCourseOfLearningProcess, setFetchCourseOfLearningProcess] = useState([])
   const [lessonsOfSummaryLesson, setLessonOfSummaryLesson] = useState([])
   const [fetchLessonsOfSummaryLesson, setFetchLessonsOfSummaryLesson] = useState([])
-  const navigate = useNavigate()
   useEffect(() =>{
     const getUser = async() =>{
         await instance.get('/users/profile')
         .then((res) => {
           setProfile(res?.data?.data?.user)
         })
-        .catch(err => err.response.data && navigate('/login'))
+        .catch(err => err)
     }
     getUser()
   }, [fetchProfile])

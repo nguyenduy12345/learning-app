@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   const { profile } = useContext(UserInfo)
   const navigate = useNavigate()
   useEffect(() => {
-    !!profile.fullName && navigate('/learning')
+    !!profile && navigate('/learning')
   },[profile])
   const {
     register,

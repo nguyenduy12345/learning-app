@@ -6,13 +6,16 @@ import Cookies from "js-cookie"
 import instance from "../utils/axiosRequest.js";
 import { UserInfo } from "../stores/user.store.jsx";
 
+import LoginFacebook from "../components/LoginFacebook.jsx";
+import LoginGoogle from "../components/LoginGoogle.jsx";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [messageLogin, setMessageLogin] = useState(false);
   const { profile } = useContext(UserInfo);
   const navigate = useNavigate();
   useEffect(() => {
-    !!profile.fullName && navigate("/learning");
+    !!profile && navigate("/learning");
   }, [profile]);
   const {
     register,
@@ -29,12 +32,23 @@ const Login = () => {
       await instance.post("login", data).then((result) => {
         setMessageLogin(result?.data?.message);
         Cookies.set("token", result?.data?.data?.accessToken, {expires: 30} )
-        result?.data ? window.location.href = "http://localhost:5173/learning " : ''
+        result?.data ? window.location.href = "http://localhost:5173/learning" : ''
       });
     } catch (error) {
       setMessageLogin(error?.response?.data?.message);
     }
   };
+  const handleLoginWithFacebook = async(response) => {
+    try {
+      const result = await instance.post('facebook_login', {
+        accessToken: response.accessToken
+      })
+      Cookies.set("token", result?.data?.data?.accessToken, {expires: 30} )
+      result?.data ? window.location.href = "http://localhost:5173/learning" : ''
+    } catch (error) {
+      setMessageLogin(error?.response?.data?.message)
+    }
+  }
   return (
     <>
       <div className="flex h-screen w-full items-center justify-center bg-gradient-to-r from-pink-400 to-blue-600">
@@ -122,20 +136,8 @@ const Login = () => {
             </Link>
           </p>
           <div className="mt-4 w-full md:flex md:flex-row">
-            <div className="flex cursor-pointer justify-center bg-[#dfe8e7] p-3 font-noto font-medium hover:text-white md:mr-1 md:w-1/2">
-              <img
-                src="images/logo/googlelogo.png"
-                className="lazyload mr-2 h-6 w-6"
-              />
-              Đăng nhập bằng Google
-            </div>
-            <div className="mt-1 flex cursor-pointer justify-center bg-[#8b8fde] p-3 font-medium text-white hover:text-black md:mt-0 md:w-1/2">
-              <img
-                src="images/logo/facebook.webp"
-                className="lazyload mr-2 h-6 w-6 font-noto"
-              />
-              Đăng nhập bằng Facebook
-            </div>
+            <LoginGoogle />
+            <LoginFacebook handleLoginWithFacebook={handleLoginWithFacebook}/>
           </div>
         </div>
       </div>

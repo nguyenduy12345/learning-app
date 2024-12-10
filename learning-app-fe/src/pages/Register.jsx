@@ -13,7 +13,7 @@ const Register = () => {
   const navigate = useNavigate()
   const { profile } = useContext(UserInfo)
   useEffect(() => {
-    !!profile.fullName && navigate('/learning')
+    !!profile && navigate('/learning')
   },[profile])
   const {
     register,

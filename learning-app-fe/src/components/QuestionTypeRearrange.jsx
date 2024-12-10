@@ -51,7 +51,7 @@ const QuestionTypeRearrange = ({ question, lessonId, handleNextQuestion }) => {
       setCountRequest(0);
       return;
     }
-    const answer = listWord.join(" ") + "."
+    const answer = listWord.join(" ")
     try {
       const result = await instance.post(`questions/${question._id}`, 
         {answer} 

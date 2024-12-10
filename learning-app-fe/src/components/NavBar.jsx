@@ -12,8 +12,8 @@ const NavBar = () => {
   return (
     <>
       <ul className="fixed bottom-0 z-20 flex h-[3.8rem] w-full justify-evenly border-t-2 border-[#e5e5e5] bg-[#f3f8f9] py-[3px] text-[#777777] md:fixed md:top-0 md:h-screen md:w-auto md:flex-col md:justify-start md:gap-2 md:border-r-[3px] md:border-t-0 md:border-r-[#eeeeee] md:bg-white md:pt-[4rem] lg:w-[17rem] lg:pt-[1rem] lg:px-6">
-        <Link
-          to="/home"
+        <a
+          href="http://localhost:5173"
           title="Trang chủ"
           className="hidden items-center justify-center md:flex"
         >
@@ -21,7 +21,7 @@ const NavBar = () => {
           <h2 className="hidden cursor-pointer justify-center py-2 font-noto text-3xl font-bold text-red-400 lg:flex">
             Duylingo
           </h2>
-        </Link>
+        </a>
         <NavLink
           title="Học tập"
           className={({ isActive }) =>
@@ -144,16 +144,16 @@ const NavBar = () => {
           to="/profile"
         >
           <li className="flex h-[2.5rem] cursor-pointer items-center px-[2px] md:mb-1 md:h-[3.5rem] md:rounded-lg md:px-3 md:py-1 md:hover:bg-[#ddf4ff] lg:w-full">
-            {profile.avatar ? (
+            {profile?.avatar ? (
               <img
-                src={profile.avatar}
+                src={profile?.avatar}
                 className="w-12 lg:w-10 rounded-[50%] border-[1px] border-blue-400 object-cover lazyload"
               />
             ) : (
               <img src="/images/logo/person-default.png" className="w-10 lazyload" />
             )}
             <p className="ml-5 hidden font-noto text-lg font-medium lg:block">
-              {profile.fullName ? profile.fullName : "Tài khoản"}
+              {profile?.fullName ? profile?.fullName : "Tài khoản"}
             </p>
           </li>
         </NavLink>

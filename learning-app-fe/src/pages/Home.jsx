@@ -9,13 +9,6 @@ gsap.defaults({
   ease: "power1.out"
 });
 
-const listImage = [
-  "/images/home-img/1426929.webp",
-  "/images/home-img/modern-education.jpg",
-  "/images/home-img/iStock-1320882544__1_.jpg",
-  "/images/home-img/banner-1242.jpg",
-  "/images/home-img/banner-1412.jpg",
-];
 const courses = [
   {
     name: "Tiếng Anh",
@@ -187,11 +180,6 @@ const benefits1 = [
     description:
       "Trò chơi giúp duy trì động lực học tập, vì nó kết hợp giữa học và vui chơi. Bạn có thể học ngoại ngữ mà không cảm thấy căng thẳng hay mệt mỏi.",
   },
-  {
-    title: "Tạo Cơ Hội Giao Tiếp Và Thực Hành Ngôn Ngữ",
-    description:
-      "Trò chơi có thể kết nối người học với những người chơi khác, tạo cơ hội giao tiếp và thực hành ngoại ngữ trong môi trường thực tế.",
-  },
 ];
 const benefits2 = [
   {
@@ -213,11 +201,6 @@ const benefits2 = [
     title: "Phát Triển Kỹ Năng Xã Hội",
     description:
       "Trò chơi giúp bạn kết nối với người học khác, chia sẻ kinh nghiệm và tạo mối quan hệ xã hội qua việc học ngoại ngữ.",
-  },
-  {
-    title: "Cải Thiện Kỹ Năng Đọc Và Viết",
-    description:
-      "Một số trò chơi có thể kết hợp giữa kỹ năng đọc và viết thông qua việc trả lời câu hỏi hoặc điền vào chỗ trống.",
   },
 ];
 const Home = () => {
@@ -347,7 +330,7 @@ const Home = () => {
     });
   }, []);
 
-  // Part 3: course container
+  // // Part 3: course container
   useEffect(() => {
     gsap.from(".course-title", {
       y: 50,
@@ -404,9 +387,8 @@ const Home = () => {
         overflow: "visible",
         duration: 5,
         position: "relative",
-        scale: 0.45,
-        y: "590px",
-        x: "-75px",
+        scale: 0.6,
+        y: "700px",
       });
     ScrollTrigger.create({
       animation: tl,
@@ -424,7 +406,7 @@ const Home = () => {
     gsap.from(".experience .title", {
       opacity: 0,
       duration: 1,
-      translateY: 100,
+      letterSpacing: '-1rem',
       scrollTrigger: {
         ease: "ease",
         trigger: ".experience",
@@ -435,20 +417,43 @@ const Home = () => {
     });
     return () => ScrollTrigger.killAll();
   }, []);
+
   useEffect(() => {
-    const tl = gsap.timeline();
-    tl.from(".experiences", {
-      opacity: 0,
-      y: "50px",
-      duration: 1,
-    });
-    ScrollTrigger.create({
-      animation: tl,
-      trigger: ".experience-container",
-      start: "top 300px",
-      end: "bottom top",
-      toggleActions: "play none none reverse",
-    });
+    gsap.fromTo(
+      '.bf-item-left',  
+      { opacity: 0, y: 50, duration: .1, stagger: .1}, 
+      {
+        opacity: 1, 
+        y: 0,  
+        stagger: 0.1,  
+        duration: 1,  
+        scrollTrigger: {
+          trigger: '.experiences-left', 
+          start: 'top 70%', 
+          end: 'bottom top',
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+    return () => ScrollTrigger.killAll();
+  }, []);
+  useEffect(() => {
+    gsap.fromTo(
+      '.bf-item-right',  
+      { opacity: 0, y: 50, duration: .1, stagger: .1 }, 
+      {
+        opacity: 1, 
+        y: 0, 
+        stagger: 0.1, 
+        duration: 1,  
+        scrollTrigger: {
+          trigger: '.experiences-right', 
+          start: 'top 70%', 
+          end: 'bottom top',
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
     return () => ScrollTrigger.killAll();
   }, []);
   return (
@@ -459,7 +464,7 @@ const Home = () => {
             Duylingo
           </p>
           <div className="button cursor-pointer rounded-xl border-[1px] border-b-[3px] border-white px-4 py-2 hover:border-black hover:bg-white hover:text-black active:scale-95">
-            <a href="http://localhost:5173/courses">Bắt đầu ngay </a>
+            <a href="http://localhost:5173/learning">Bắt đầu ngay </a>
             <span>
               <i className="fa-duotone fa-solid fa-play"></i>
             </span>
@@ -473,15 +478,15 @@ const Home = () => {
           className="moon-bg h-[100vh] w-[100vw] object-cover"
         ></img>
         <div className="absolute left-[41%] top-[52%] h-[6rem] overflow-hidden text-[5rem] font-thin tracking-wider">
-          <p className="title-and">&</p>
+          <p className="title-and great-vibes-regular">&</p>
         </div>
-        <div className="window-image absolute left-0 top-0 z-10 h-[100vh] w-full">
-          <div className="absolute left-[18%] top-[30%] h-[6rem] w-full overflow-hidden text-[4.5rem] font-semibold tracking-wider">
-            <p className="title-left">Kiến Thức</p>
+        <div className="window-image absolute left-0 top-0 z-10 h-[100vh] w-full text-shadow-white">
+          <div className="absolute left-[11%] top-[25%] h-[9.2rem] w-full overflow-hidden text-[7rem] font-semibold tracking-wider">
+            <p className="title-left great-vibes-regular w-full h-full">Kiến Thức</p>
           </div>
 
-          <div className="absolute bottom-[25%] right-[18%] h-[6rem] w-full overflow-hidden text-end text-[4.5rem] font-semibold tracking-wider">
-            <p className="title-right">Thực Hành</p>
+          <div className="absolute bottom-[23%] right-[11%] h-[9.2rem] w-full overflow-hidden text-end text-[7rem] font-semibold tracking-wider">
+            <p className="title-right great-vibes-regular w-full h-full">Trải Nghiệm</p>
           </div>
           <div className="welcome absolute bottom-[1.7rem] w-full text-center font-lato text-[1rem] font-thin tracking-[0.3rem]">
             Chào mừng bạn đến với hành trình học ngoại ngữ tại Duylingo!
@@ -579,47 +584,34 @@ const Home = () => {
       </div>
       <div className="experience-container h-[100vh] w-[100vw] bg-gradient-to-l from-black via-gray-800 to-black font-quicksand text-white transition">
         <div className="experience relative h-full w-full">
-          <h4 className="title absolute top-[12%] w-full text-center text-[1.8rem] font-bold">
+          <h4 className="title experience-title absolute top-[10%] w-full text-center text-[1.8rem] font-bold tracking-[0.2rem]">
             Lợi ích khi học ngoại ngữ qua trò chơi
           </h4>
-          <svg
-            className="absolute left-[42.4%] top-[37%] -rotate-[80deg] text-white"
-            width="130"
-            height="200"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10 100 C 100 50, 150 50, 250 100 S 400 150, 490 100"
-              fill="transparent"
-              stroke="black"
-              strokeWidth="0.5"
-            />
-          </svg>
           <img
             src="/images/home/reading.png"
-            className="absolute left-[44%] top-1/2 h-[20rem] -translate-y-1/2"
+            className="absolute left-[43%] top-[60%] h-[15rem]"
           />
-          <div className="experiences absolute left-[5%] top-[23%] flex w-[35%] flex-col gap-[1.5rem]">
+          <div className="experiences-left grid grid-cols-2 absolute left-[3%] top-[20%]  w-[35%] gap-[1.8rem]">
             {benefits1.map((item, index) => (
               <div
                 key={index}
-                className="bf-item flex h-[5rem] w-full cursor-pointer flex-col justify-center rounded-xl border-[1px] border-b-[4px] border-gray-300 px-6 py-2 shadow-lg transition-all hover:h-[7rem] hover:items-start hover:whitespace-normal hover:py-[2px] hover:shadow-2xl"
+                className="bf-item-left w-full h-[15.6rem] cursor-pointer rounded-xl shadow-red-300 border-t-[1px] border-t-white p-6 shadow-xl hover:shadow-xl hover:shadow-white  transition-all "
               >
-                <p className="text-md mb-[4px] font-bold">{item.title}</p>
-                <p className="w-full truncate hover:whitespace-normal">
+                <p className="text-md mb-[1rem] font-bold h-[3rem] flex items-center">{item.title}</p>
+                <p className="w-full text-md">
                   {item.description}
                 </p>
               </div>
             ))}
           </div>
-          <div className="experiences absolute right-[5%] top-[23%] flex w-[35%] flex-col gap-[1.5rem]">
+          <div className="experiences-right grid grid-cols-2 absolute right-[3%] top-[20%] w-[35%] gap-[1.8rem]">
             {benefits2.map((item, index) => (
               <div
                 key={index}
-                className="bf-item flex h-[5rem] w-full cursor-pointer flex-col justify-center rounded-xl border-[1px] border-b-[4px] border-gray-300 px-6 py-2 shadow-lg transition-all hover:h-[7rem] hover:items-start hover:whitespace-normal hover:py-[2px] hover:shadow-2xl"
+                className="bf-item-right w-full h-[15.6rem] cursor-pointer rounded-xl shadow-yellow-300 border-t-[1px] border-t-white p-6 shadow-xl hover:shadow-xl hover:shadow-white transition-all "
               >
-                <p className="text-md mb-[4px] font-bold">{item.title}</p>
-                <p className="w-full truncate hover:whitespace-normal">
+                <p className="text-md mb-[1rem] font-bold h-[3rem] flex items-center">{item.title}</p>
+                <p className="w-full text-md">
                   {item.description}
                 </p>
               </div>
